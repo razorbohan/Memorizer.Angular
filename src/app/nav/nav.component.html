@@ -1,0 +1,33 @@
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+  <div class="container">
+    <a routerLink="/Home" class="navbar-brand d-flex align-items-center">
+      <img src="assets/img/memo.png" alt="" class="img-fluid" object-fit: contain>
+      <span>Memorizer</span>
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse"
+      aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse">
+      <!-- <%if (locals.mode) { %> -->
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="" id="switchModeButton"></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="" data-toggle="modal" data-target="#addModal">Add</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="" data-toggle="modal" data-target="#findModal">Find</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="" id="deleteButton">Delete</a>
+        </li>
+      </ul>
+      <!-- <% } %> -->
+      <div class="dropdown-divider"></div>
+      <!-- <%- include partials/login_partial.ejs %> -->
+    </div>
+  </div>
+</nav>

@@ -1,0 +1,64 @@
+$mainFont: Verdana, Arial, Helvetica, sans-serif;
+
+:host {
+  font-family: $mainFont;
+}
+
+textarea {
+  height: 200px;
+  text-align: center;
+  font-weight: bold;
+  resize: none;
+}
+
+#message {
+  position: relative;
+  left: 15px;
+}
+
+#messageBox {
+  display: none;
+}
+
+#answerForm {
+  input {
+    padding: 15px 20px;
+  }
+}
+
+.update-group {
+  visibility: hidden;
+}
+
+.fa-exchange {
+  transform: rotate(90deg);
+}
+
+.summary {
+  margin: 0.25em auto;
+}
+
+.login-form,
+.register-form {
+  margin-top: 3rem;
+}
+
+@media only screen and (max-width: 992px) {
+  textarea {
+    font-size: 20px;
+  }
+
+  .update-group button {
+    padding: 16px;
+  }
+}
+
+@media only screen and (min-width: 992px) {
+  textarea {
+    font-size: 25px;
+  }
+
+  .update-group button {
+    padding: 16px 25px;
+  }
+}
