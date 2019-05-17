@@ -1,31 +1,44 @@
 import { Component, OnInit } from '@angular/core';
-import { HomeService } from './home.service';
+import { HomeService as MemoService } from './memo.service';
 import { Memo } from './memo';
 
 @Component({
 	selector: 'memo-home',
 	templateUrl: './home.component.html',
 	styleUrls: ['./home.component.scss'],
-	providers: [HomeService]
+	providers: [MemoService]
 })
 export class HomeComponent implements OnInit {
 
-	private memos: Memo[];
-	private currentMemo: Memo;
-	private isShowAnswer: boolean = false;
+	private currentMemo: Memo = null;
+	private isShowAnswer: boolean;
+	private count: number = 0;
 
-	constructor(private homeService: HomeService) { }
+	constructor(private memoService: MemoService) { }
 
 	async ngOnInit() {
-		this.memos = await this.homeService.getMemos();
-		this.currentMemo = this.memos[0];
+		this.count = await this.memoService.getMemos();
+
+		this.memoService.Subject.subscribe(
+			(memo: Memo) => {
+				this.isShowAnswer = false;
+				this.currentMemo = memo;
+				this.count--;
+			},
+			(e) => console.log(e.message),
+			() => {
+				console.log("Finished!");
+				this.isShowAnswer = false;
+				this.currentMemo = null;
+			}
+		);
 	}
 
 	public showAnswer() {
-		this.isShowAnswer = true;
+		this.isShowAnswer = this.currentMemo ? true : false;
 	}
 
 	public submitAnswer(answer: string) {
-		console.log(answer);
+		this.memoService.submitAnswer(answer);
 	}
 }
