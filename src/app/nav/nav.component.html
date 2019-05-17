@@ -1,19 +1,19 @@
-<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark" (click-outside)="closeMenu()">
   <div class="container">
     <a routerLink="/Home" class="navbar-brand d-flex align-items-center">
       <img src="assets/img/memo.png" alt="" class="img-fluid" object-fit: contain>
       <span>Memorizer</span>
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse"
-      aria-label="Toggle navigation">
+      aria-label="Toggle navigation" (click)="isOpenMenu=undefined">
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div class="collapse navbar-collapse">
+    <div class="collapse navbar-collapse" [class.show]="isOpenMenu">
       <!-- <%if (locals.mode) { %> -->
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link" href="" id="switchModeButton"></a>
+          <a class="nav-link" href="/Home/Mode/{{mode}}" id="switchModeButton">{{mode}}</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="" data-toggle="modal" data-target="#addModal">Add</a>
@@ -31,3 +31,52 @@
     </div>
   </div>
 </nav>
+
+<div class="modal fade" id="addModal" tabindex="-1">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">Add new Memo</h5>
+				<a href="#" class="close" data-dismiss="modal">
+					<span>×</span>
+				</a>
+			</div>
+			<div class="modal-body">
+				<textarea #newQuestion class="col-md-12" id="addQuestionArea"></textarea>
+				<textarea #newAnswer class="col-md-12" id="addAnswerArea"></textarea>
+			</div>
+			<div class="modal-footer">
+				<button class="btn btn-primary" (click)="submitNewMemo(newQuestion.value, newAnswer.value)">Add</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="findModal" tabindex="-1">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">Find Memo</h5>
+				<a href="#" class="close" data-dismiss="modal">
+					<span>×</span>
+				</a>
+			</div>
+			<div class="modal-body">
+				<div class="row justify-content-center">
+					<select class="col-10 col-sm-3" id="findKey">
+						<option value=" ">*</option>
+						<option value="id">Id</option>
+						<option value="question">Question</option>
+						<option value="answer">Answer</option>
+						<option value="repeatDate">Repeat date</option>
+						<option value="postponeLevel">LVL</option>
+						<option value="scores">Scores</option>
+					</select>
+					<input class="col-10 col-sm-6" type="text" id="findValue" />
+					<input class="col-10 col-sm-2 btn btn-primary" type="button" id="findNewMemo" value="Find" />
+				</div>
+			</div>
+			<div id="jsGrid"></div>
+		</div>
+	</div>
+</div>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { HomeService as MemoService } from './memo.service';
+import { MemoService } from './memo.service';
 import { Memo } from './memo';
+import { Http } from '@angular/http';
 
 @Component({
 	selector: 'memo-home',
@@ -11,10 +12,18 @@ import { Memo } from './memo';
 export class HomeComponent implements OnInit {
 
 	private currentMemo: Memo = null;
-	private isShowAnswer: boolean;
-	private count: number = 0;
+	private count: number;
+	private mode: string = "Repeat";
+	private isLoading: boolean;
 
-	constructor(private memoService: MemoService) { }
+	private isShowAnswer: boolean;
+	private isShowUpdateGroup: boolean;
+
+	private message: string;
+	private isShowMessage: boolean;
+	private isSuccess: boolean;
+
+	constructor(private memoService: MemoService, private http: Http) { }
 
 	async ngOnInit() {
 		this.count = await this.memoService.getMemos();
@@ -23,6 +32,7 @@ export class HomeComponent implements OnInit {
 			(memo: Memo) => {
 				this.isShowAnswer = false;
 				this.currentMemo = memo;
+
 				this.count--;
 			},
 			(e) => console.log(e.message),
@@ -40,5 +50,34 @@ export class HomeComponent implements OnInit {
 
 	public submitAnswer(answer: string) {
 		this.memoService.submitAnswer(answer);
+	}
+
+	public showUpdateGgroup(isShow: boolean) {
+		this.isShowUpdateGroup = isShow;
+	}
+
+	public replaceMemos() {
+		let question = this.currentMemo.question;
+		let answer = this.currentMemo.answer;
+		this.currentMemo.question = answer;
+		this.currentMemo.answer = question;
+	}
+
+	public async updateMemos() {
+		try {
+			this.isLoading = true;
+			let response = await this.http.post("/Home/Update", this.currentMemo).toPromise();
+			this.message = response.toString();
+		} catch (error) {
+			this.message = error.statusText;
+		}
+
+		this.isSuccess = !this.message.startsWith("Error");
+		this.isShowMessage = true;
+		this.isLoading = false;
+	}
+
+	public hideMessage() {
+		this.isShowMessage = false;
 	}
 }
