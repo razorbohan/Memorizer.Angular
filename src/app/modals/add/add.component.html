@@ -1,0 +1,13 @@
+<div class="modal-header">
+  <h5 class="modal-title">Add new Memo</h5>
+  <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <textarea #newQuestion class="col-md-12"></textarea>
+  <textarea #newAnswer class="col-md-12"></textarea>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-primary" (click)="submitNewMemo(newQuestion.value, newAnswer.value)">Add</button>
+</div>

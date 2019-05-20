@@ -1,32 +1,25 @@
-import { Component, OnInit } from '@angular/core';
-import { Http } from '@angular/http';
+import { Component } from '@angular/core';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+import { AddMemoComponent } from '../modals/add/add.component';
+import { FindMemoComponent } from '../modals/find/find.component';
 
 @Component({
-  selector: 'memo-nav',
-  templateUrl: './nav.component.html',
-  styleUrls: ['./nav.component.scss']
+	selector: 'memo-nav',
+	templateUrl: './nav.component.html',
+	styleUrls: ['./nav.component.scss']
 })
 export class NavComponent {
 
-  private isOpenMenu: boolean;
+	addModalRef: BsModalRef;
+	findModalRef: BsModalRef;
 
-  constructor(private http: Http) { }
+	constructor(private modalService: BsModalService) { }
 
-  public closeMenu() {
-    this.isOpenMenu = false;
-  }
+	openAddModal() {
+		this.addModalRef = this.modalService.show(AddMemoComponent, { class: 'modal-lg' });
+	}
 
-  async submitNewMemo(newQuestion: string, newAnswer: string) {
-    try {
-      let body = {
-        question: newQuestion,
-        answer: newAnswer
-      };
-      //this.isLoading = true;
-      let response = await this.http.post("/Home/Add", body).toPromise();     
-      //this.message = response.toString();
-    } catch (error) {
-      //this.message = error.statusText;
-    }
-  }
+	openFindModal() {
+		this.findModalRef = this.modalService.show(FindMemoComponent, { class: 'find-grid' });
+	}
 }

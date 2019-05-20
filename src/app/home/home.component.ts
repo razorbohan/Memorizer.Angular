@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { MemoService } from './memo.service';
-import { Memo } from './memo';
-import { Http } from '@angular/http';
+import { MemoService } from '../services/memo.service';
+import { Memo } from '../services/memo';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+import { FinishComponent } from '../modals/finish/finish.component';
+
 
 @Component({
 	selector: 'memo-home',
@@ -23,7 +25,10 @@ export class HomeComponent implements OnInit {
 	private isShowMessage: boolean;
 	private isSuccess: boolean;
 
-	constructor(private memoService: MemoService, private http: Http) { }
+	private finishModalRef: BsModalRef;
+
+	constructor(private memoService: MemoService,
+		private modalService: BsModalService) { }
 
 	async ngOnInit() {
 		this.count = await this.memoService.getMemos();
@@ -37,7 +42,7 @@ export class HomeComponent implements OnInit {
 			},
 			(e) => console.log(e.message),
 			() => {
-				console.log("Finished!");
+				this.finishModalRef = this.modalService.show(FinishComponent);
 				this.isShowAnswer = false;
 				this.currentMemo = null;
 			}
@@ -63,11 +68,23 @@ export class HomeComponent implements OnInit {
 		this.currentMemo.answer = question;
 	}
 
-	public async updateMemos() {
+	public async updateMemo() {
 		try {
 			this.isLoading = true;
-			let response = await this.http.post("/Home/Update", this.currentMemo).toPromise();
-			this.message = response.toString();
+			this.message = await this.memoService.updateMemo(this.currentMemo);
+		} catch (error) {
+			this.message = error.statusText;
+		}
+
+		this.isSuccess = !this.message.startsWith("Error");
+		this.isShowMessage = true;
+		this.isLoading = false;
+	}
+
+	public async deleteMemo() {
+		try {
+			this.isLoading = true;
+			this.message = await this.memoService.deleteMemo(this.currentMemo);
 		} catch (error) {
 			this.message = error.statusText;
 		}

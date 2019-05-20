@@ -1,3 +1,38 @@
 body {
   padding-top: 70px;
+  font-family: Verdana, Arial, Helvetica, sans-serif;
 }
+
+.dropdown-divider {
+  border-color: gray;
+}
+
+@media only screen and (max-width: 992px) {
+  textarea {
+    font-size: 20px;
+  }
+
+  .update-group button {
+    padding: 16px;
+  }
+}
+
+@media only screen and (min-width: 992px) {
+  textarea {
+    font-size: 25px;
+  }
+
+  .update-group button {
+    padding: 16px 25px;
+  }
+}
+
+.find-grid {
+	max-width: 1100px;
+}
+
+.cdk-overlay-container{
+	z-index: 1060;
+}
+
+@import "~ng-pick-datetime/assets/style/picker.min.css";

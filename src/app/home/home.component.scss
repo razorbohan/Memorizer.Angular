@@ -1,9 +1,3 @@
-$mainFont: Verdana, Arial, Helvetica, sans-serif;
-
-:host {
-  font-family: $mainFont;
-}
-
 textarea {
   height: 200px;
   text-align: center;
@@ -27,10 +21,6 @@ textarea {
   }
 }
 
-.update-group {
-  visibility: hidden;
-}
-
 .fa-exchange {
   transform: rotate(90deg);
 }
@@ -44,33 +34,13 @@ textarea {
   margin-top: 3rem;
 }
 
-.is-visible {
-  visibility: visible;
-  display: block;
-}
+// .is-visible {
+//   visibility: visible;
+//   display: block;
+// }
 
 .update-group:hover {
   visibility: visible;
 }
 
 @import "loader";
-
-@media only screen and (max-width: 992px) {
-  textarea {
-    font-size: 20px;
-  }
-
-  .update-group button {
-    padding: 16px;
-  }
-}
-
-@media only screen and (min-width: 992px) {
-  textarea {
-    font-size: 25px;
-  }
-
-  .update-group button {
-    padding: 16px 25px;
-  }
-}

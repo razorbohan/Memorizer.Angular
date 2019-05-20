@@ -1,6 +1,5 @@
-<div id="messageBox" class="message-box alert" 
-	*ngIf="isShowMessage" (click-outside)="hideMessage()"
-	[ngClass]='isSuccess ? "alert-success" : "alert-danger"'> 
+<div id="messageBox" class="message-box alert" *ngIf="isShowMessage" (click-outside)="hideMessage()"
+	[ngClass]='isSuccess ? "alert-success" : "alert-danger"'>
 	<span id="message">{{message}}</span>
 	<button type="button" class="close" (click)="hideMessage()">
 		<span>×</span>
@@ -13,9 +12,9 @@
 		<span>Scores: {{currentMemo ? currentMemo.scores : 0}} </span>
 	</div>
 </div>
-
-<textarea class="col-12" id="questionArea" (focus)="showUpdateGgroup(true)"
-	(blur)="showUpdateGgroup(false)">{{currentMemo?.question}}</textarea>
+ 
+<textarea class="col-12" id="questionArea" [(ngModel)]="currentMemo.question" (focus)="showUpdateGgroup(true)"
+	(blur)="showUpdateGgroup(false)"></textarea>
 
 <div class="row justify-content-around my-2 text-nowrap">
 	<div class="col-3 d-flex justify-content-center align-items-center">
@@ -24,8 +23,9 @@
 	<div class="col-3 d-flex justify-content-center">
 		<button (click)="showAnswer()" class="btn btn-primary p-3" id="showAnswer" type="button">Show</button>
 	</div>
-	<div class="col-3 d-flex justify-content-center update-group" [class.is-visible]="isShowUpdateGroup">
-		<div class="btn-group">
+	<div class="col-3 d-flex justify-content-center update-group">
+		<div class="btn-group" *ngIf="isShowUpdateGroup || isFocused" (mouseenter)="isFocused=true"
+			(mouseleave)="isFocused=false">
 			<button class="btn btn-outline-secondary" (click)="replaceMemos()" type="button">
 				<i class="fa fa-exchange"></i>
 			</button>
@@ -33,11 +33,14 @@
 				<i class="far fa-save"></i>
 			</button>
 		</div>
+		<button class="btn btn-outline-danger mx-2" (click)="deleteMemo()" type="button">
+			<i class="fas fa-trash-alt"></i>
+		</button>
 	</div>
 </div>
 
-<textarea class="col-12" (focus)="showUpdateGgroup(true)"
-	(blur)="showUpdateGgroup(false)">{{isShowAnswer ? currentMemo?.answer : ''}}</textarea>
+<textarea class="col-12" *ngIf="isShowAnswer" (focus)="showUpdateGgroup(true)" (blur)="showUpdateGgroup(false)"
+	[(ngModel)]="currentMemo.answer"></textarea>
 
 <div *ngIf="isShowAnswer">
 	<div class="row">
@@ -63,25 +66,6 @@
 			<div></div>
 			<div></div>
 			<div></div>
-		</div>
-	</div>
-</div>
-
-<div class="modal fade" id="finishModal" tabindex="-1">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title">Finished</h5>
-				<a href="#" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">×</span>
-				</a>
-			</div>
-			<div class="modal-body">
-				<p>There is nothing to <span id="finishMessage"></span> more!</p>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-			</div>
 		</div>
 	</div>
 </div>

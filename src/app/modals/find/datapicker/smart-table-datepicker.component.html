@@ -1,0 +1,9 @@
+<div class="input-group">
+    <input
+        [owlDateTimeTrigger]="dt" [owlDateTime]="dt"
+        [(ngModel)]="inputModel"
+        placeholder="{{placeholder}}"
+        readonly
+        class="form-control">
+</div>
+<owl-date-time #dt [pickerType]="'calendar'" (afterPickerClosed)="onChange()"></owl-date-time>

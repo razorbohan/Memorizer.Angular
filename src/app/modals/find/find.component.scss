@@ -1,0 +1,11 @@
+.modal-body {
+  input,
+  select {
+    margin-right: 10px;
+  }
+
+  .jsgrid-cell {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
