@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Postpone } from '../../../services/memo';
+import { Postpone } from '../../../models/memo';
 import { SmartTableDatepickerRenderComponent, SmartTableDatepickerComponent } from '../datapicker/smart-table-datepicker.component';
 
 @Component({

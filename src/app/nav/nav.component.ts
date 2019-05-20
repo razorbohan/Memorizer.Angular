@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
-import { AddMemoComponent } from '../modals/add/add.component';
-import { FindMemoComponent } from '../modals/find/find.component';
+import { AddMemoComponent } from '../shared/modals/add/add.component';
+import { FindMemoComponent } from '../shared/modals/find/find.component';
 
 @Component({
 	selector: 'memo-nav',

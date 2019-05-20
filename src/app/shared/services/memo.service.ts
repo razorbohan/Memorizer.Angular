@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Memo, PostponeLevels } from './memo';
+import { Memo, PostponeLevels } from '../models/memo';
 import { BehaviorSubject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 

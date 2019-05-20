@@ -5,8 +5,8 @@ export class Memo {
 	public scores: number;
 
 	constructor(
-		public question: string,
-		public answer: string
+		public question: string = '',
+		public answer: string = ''
 	) { }
 }
 

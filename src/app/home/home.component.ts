@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { MemoService } from '../services/memo.service';
-import { Memo } from '../services/memo';
+import { MemoService } from '../shared/services/memo.service';
+import { Memo } from '../shared/models/memo';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
-import { FinishComponent } from '../modals/finish/finish.component';
+import { FinishComponent } from '../shared/modals/finish/finish.component';
 
 
 @Component({
@@ -13,7 +13,7 @@ import { FinishComponent } from '../modals/finish/finish.component';
 })
 export class HomeComponent implements OnInit {
 
-	private currentMemo: Memo = null;
+	private currentMemo: Memo = new Memo();
 	private count: number;
 	private mode: string = "Repeat";
 	private isLoading: boolean;
