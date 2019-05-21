@@ -23,6 +23,7 @@ import { SmartTableDatepickerRenderComponent, SmartTableDatepickerComponent } fr
 import { MemoService } from './shared/services/memo.service';
 import { MessageComponent } from './shared/components/message/message.component';
 import { LoaderComponent } from './shared/components/loader/loader.component';
+import { ConfirmComponent } from './shared/modals/confirm/confirm.component';
 
 @NgModule({
 	declarations: [
@@ -37,7 +38,8 @@ import { LoaderComponent } from './shared/components/loader/loader.component';
 		SmartTableDatepickerRenderComponent,
 		SmartTableDatepickerComponent,
 		MessageComponent,
-		LoaderComponent
+		LoaderComponent,
+		ConfirmComponent
 	],
 	imports: [
 		BrowserModule,
@@ -56,19 +58,16 @@ import { LoaderComponent } from './shared/components/loader/loader.component';
 		AddMemoComponent,
 		FindMemoComponent,
 		FinishComponent,
+		ConfirmComponent,
 		SmartTableDatepickerRenderComponent,
 		SmartTableDatepickerComponent
 	]
 })
 export class AppModule { }
 
-//TODO: messageBox to sep-component
-//TODO: base logic
+//TODO: finishMessage + mode
 //TODO: confirm when deleting
-//TODO: finishMessage
 //TODO: user login/register
-//TODO: connect to db
-//TODO: common loader & message-error-box
-//TODO: proper collor for message-error-box
 //TODO: animations (messages, hovers)
+//TODO: big start loader
 //TODO: tests

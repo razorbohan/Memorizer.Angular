@@ -13,12 +13,14 @@ export class MemoService {
 
 	private baseUrl = 'https://localhost:3000/api';
 	private memos: Memo[];
-	public Subject = new BehaviorSubject<Memo>(null);
+	public Subject = new BehaviorSubject<{ currentMemo: Memo, count: number }>(null);
+	public mode: string = "Repeat";
 
-	constructor(private http: HttpClient) { }
+	constructor(private http: HttpClient) {
+	}
 
-	public async getMemos(): Promise<number> {
-		return new Promise<number>((resolve, reject) => {
+	public async getMemos(): Promise<void> {
+		return new Promise((resolve, reject) => {
 			setTimeout(async () => {
 				let response = await this.http.get<ApiResponse>(`${this.baseUrl}/GetMemos`).toPromise();
 				if (!response.success)
@@ -28,14 +30,33 @@ export class MemoService {
 					return;
 				}
 
-				this.memos = <Memo[]>response.body;
-				let count = this.memos.length;
+				let memos = <Memo[]>response.body;
+				this.memos = this.filterMemos(memos);
 				this.nextMemo();
 
 				//return count;
-				resolve(count);
+				resolve();
 			}, 1000);
 		});
+	}
+
+	public switchMode() {
+		this.mode = this.mode == 'Repeat' ? 'Learn' : 'Repeat';
+		this.getMemos();
+	}
+
+	private filterMemos(memos: Memo[]): Memo[] {
+		return memos
+			.filter((memo) => {
+				return new Date(memo.repeatDate) < new Date()
+					&& this.mode == 'Repeat'
+					? memo.postponeLevel != 0
+					: memo.postponeLevel == 0;
+			}).sort((date1, date2) => {
+				return new Date(date1.repeatDate).getTime() - new Date(date2.repeatDate).getTime();
+			}).sort((level1, level2) => {
+				return level1.postponeLevel - level2.postponeLevel;
+			});
 	}
 
 	public async updateMemo(memo: Memo): Promise<Message> {
@@ -94,8 +115,8 @@ export class MemoService {
 		});
 	}
 
-	async submitAnswer(answer: string) {
-		let currentMemo = this.Subject.value;
+	public async submitAnswer(answer: string): Promise<Message> {
+		let currentMemo = this.Subject.value.currentMemo;
 
 		switch (answer) {
 			case 'Bad':
@@ -119,14 +140,19 @@ export class MemoService {
 				console.error(`Wrong answer: '${answer}'`);
 		}
 
-		await this.updateMemo(currentMemo); //TODO: reurn message
-
+		let message = await this.updateMemo(currentMemo);
 		this.nextMemo();
+
+		return message;
 	}
 
 	private nextMemo() {
-		if (this.memos.length > 0)
-			this.Subject.next(this.memos.pop());
+		if (this.memos.length > 0) {
+			// if (this.memos.length % 3 == 0)
+			// 	this.Subject.complete();
+			// else
+			this.Subject.next({ currentMemo: this.memos.pop(), count: this.memos.length });
+		}
 		else {
 			this.Subject.complete();
 		}

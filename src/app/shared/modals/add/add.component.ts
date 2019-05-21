@@ -15,7 +15,7 @@ export class AddMemoComponent implements OnInit {
   private isLoading: boolean;
 
   constructor(
-    public modalRef: BsModalRef,
+    private modalRef: BsModalRef,
     private memoService: MemoService) { }
 
   ngOnInit() {

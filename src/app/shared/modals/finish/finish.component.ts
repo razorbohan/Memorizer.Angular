@@ -11,5 +11,6 @@ export class FinishComponent implements OnInit {
   constructor(public modalRef: BsModalRef) { }
 
   ngOnInit() {
+    
   }
 }

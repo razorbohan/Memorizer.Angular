@@ -1,6 +1,6 @@
 <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
 	<div class="container">
-		<a routerLink="/Home" class="navbar-brand d-flex align-items-center">
+		<a href="/Home" class="navbar-brand d-flex align-items-center">
 			<img src="assets/img/memo.png" alt="" class="img-fluid" object-fit: contain>
 			<span>Memorizer</span>
 		</a>
@@ -13,7 +13,7 @@
 			<!-- <%if (locals.mode) { %> -->
 			<ul class="navbar-nav">
 				<li class="nav-item">
-					<a class="nav-link" href="/Home/Mode/{{mode}}" id="switchModeButton">{{mode}}</a>
+					<a class="nav-link" (click)="switchMode()">{{showMode()}}</a>
 				</li>
 				<li class="nav-item">
 					<!-- <a class="nav-link" href="" data-toggle="modal" data-target="#addModal">Add</a> -->
