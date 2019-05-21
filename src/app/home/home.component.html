@@ -1,10 +1,4 @@
-<div id="messageBox" class="message-box alert" *ngIf="isShowMessage" (click-outside)="hideMessage()"
-	[ngClass]='isSuccess ? "alert-success" : "alert-danger"'>
-	<span id="message">{{message}}</span>
-	<button type="button" class="close" (click)="hideMessage()">
-		<span>×</span>
-	</button>
-</div>
+<alert-message [message]="message"></alert-message>
 
 <div class="row">
 	<div class="summary">
@@ -12,9 +6,9 @@
 		<span>Scores: {{currentMemo ? currentMemo.scores : 0}} </span>
 	</div>
 </div>
- 
-<textarea class="col-12" id="questionArea" [(ngModel)]="currentMemo.question" (focus)="showUpdateGgroup(true)"
-	(blur)="showUpdateGgroup(false)"></textarea>
+
+<textarea class="col-12" id="questionArea" [ngModel]="currentMemo?.question" (ngModelChange)="currentMemo.question=$event"
+(focus)="showUpdateGgroup(true)" (blur)="showUpdateGgroup(false)"></textarea>
 
 <div class="row justify-content-around my-2 text-nowrap">
 	<div class="col-3 d-flex justify-content-center align-items-center">
@@ -40,7 +34,7 @@
 </div>
 
 <textarea class="col-12" *ngIf="isShowAnswer" (focus)="showUpdateGgroup(true)" (blur)="showUpdateGgroup(false)"
-	[(ngModel)]="currentMemo.answer"></textarea>
+	[ngModel]="currentMemo?.answer" (ngModelChange)="currentMemo.answer=$event"></textarea>
 
 <div *ngIf="isShowAnswer">
 	<div class="row">
@@ -59,13 +53,4 @@
 	</div>
 </div>
 
-<div *ngIf="isLoading" class="row">
-	<div class="mx-auto">
-		<div class="lds-ellipsis">
-			<div></div>
-			<div></div>
-			<div></div>
-			<div></div>
-		</div>
-	</div>
-</div>
+<memo-loader [isLoading]="isLoading"></memo-loader>

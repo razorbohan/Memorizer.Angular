@@ -2,6 +2,11 @@ import { Injectable } from '@angular/core';
 import { Memo, PostponeLevels } from '../models/memo';
 import { BehaviorSubject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { Message } from '../models/message';
+
+class ApiResponse {
+	constructor(public success: boolean, public body: Object, public error: string) { }
+}
 
 @Injectable()
 export class MemoService {
@@ -13,49 +18,80 @@ export class MemoService {
 	constructor(private http: HttpClient) { }
 
 	public async getMemos(): Promise<number> {
-		let response = await this.http.get<Array<Memo>>(`${this.baseUrl}/GetMemos`).toPromise();
-		this.memos = response;
+		return new Promise<number>((resolve, reject) => {
+			setTimeout(async () => {
+				let response = await this.http.get<ApiResponse>(`${this.baseUrl}/GetMemos`).toPromise();
+				if (!response.success)
+				//throw response.error;
+				{
+					reject(response.error);
+					return;
+				}
 
-		let count = this.memos.length
-		this.nextMemo();
+				this.memos = <Memo[]>response.body;
+				let count = this.memos.length;
+				this.nextMemo();
 
-		return count;
+				//return count;
+				resolve(count);
+			}, 1000);
+		});
 	}
 
-	public async updateMemo(memo: Memo): Promise<string> {
-		try {
-			let response = await this.http.post(`${this.baseUrl}/UpdateMemo`, memo).toPromise();
-			return 'Updated!';
-		} catch (error) {
-			return `Error updating memo: ${error.status}: ${error.statusText}`;
-		}
+	public async updateMemo(memo: Memo): Promise<Message> {
+		return new Promise<Message>((resolve) => {
+			setTimeout(async () => {
+				try {
+					let response = await this.http.post<ApiResponse>(`${this.baseUrl}/UpdateMemo`, memo).toPromise();
+					if (response.success)
+						//return new Message('Updated!', 'success');
+						resolve(new Message('Updated!', 'success'));
+					else //return new Message(`Error updating memo: ${response.error}`, 'danger')
+						resolve(new Message(`Error updating memo: ${response.error}`, 'danger'));
+				} catch (error) {
+					//return new Message(`Error updating memo: ${error.status}: ${error.statusText}`, 'error');
+					resolve(new Message(`Error updating memo: ${error.status}: ${error.statusText}`, 'danger'));
+				}
+			}, 1000);
+		});
 	}
 
-	public async addMemo(memo: Memo): Promise<string> {
-		try {
-			let response = await this.http.post(`${this.baseUrl}/AddMemo`, memo).toPromise();
-			return 'Added!';
-		} catch (error) {
-			return `Error adding memo: ${error.status}: ${error.statusText}`;
-		}
+	public async addMemo(memo: Memo): Promise<Message> {
+		return new Promise<Message>((resolve) => {
+			setTimeout(async () => {
+				try {
+					let response = await this.http.post<ApiResponse>(`${this.baseUrl}/AddMemo`, memo).toPromise();
+					if (response.success)
+						//return new Message('Added!', 'success');
+						resolve(new Message('Added!', 'success'));
+					else //return new Message(`Error adding memo: ${response.error}`, 'danger')
+						resolve(new Message(`Error adding memo: ${response.error}`, 'danger'));
+				} catch (error) {
+					//return new Message(`Error adding memo: ${error.status}: ${error.statusText}`, 'error');
+					resolve(new Message(`Error adding memo: ${error.status}: ${error.statusText}`, 'error'));
+				}
+			}, 1000);
+		});
 	}
 
-	public async deleteMemo(memo: Memo): Promise<string> {
-		try {
-			let response = await this.http.post(`${this.baseUrl}/DeleteMemo`, memo.id).toPromise();
-			this.nextMemo();
-			return 'Deleted!';
-		} catch (error) {
-			return `Error deleting memo: ${error.status}: ${error.statusText}`;
-		}
-	}
-
-	private nextMemo() {
-		if (this.memos.length > 0)
-			this.Subject.next(this.memos.pop());
-		else {
-			this.Subject.complete();
-		}
+	public async deleteMemo(memo: Memo): Promise<Message> {
+		return new Promise<Message>((resolve) => {
+			setTimeout(async () => {
+				try {
+					let response = await this.http.post<ApiResponse>(`${this.baseUrl}/DeleteMemo`, memo.id).toPromise();
+					if (response.success)
+						//return new Message('Deleted!', 'success');
+						resolve(new Message('Deleted!', 'success'));
+					else //return new Message(`Error deleting memo: ${response.error}`, 'danger')
+						resolve(new Message(`Error deleting memo: ${response.error}`, 'danger'));
+				} catch (error) {
+					//return new Message(`Error deleting memo: ${error.status}: ${error.statusText}`, 'error');
+					resolve(new Message(`Error deleting memo: ${error.status}: ${error.statusText}`, 'error'));
+				} finally {
+					this.nextMemo();
+				}
+			}, 1000);
+		});
 	}
 
 	async submitAnswer(answer: string) {
@@ -83,9 +119,17 @@ export class MemoService {
 				console.error(`Wrong answer: '${answer}'`);
 		}
 
-		await this.updateMemo(currentMemo);
+		await this.updateMemo(currentMemo); //TODO: reurn message
 
 		this.nextMemo();
+	}
+
+	private nextMemo() {
+		if (this.memos.length > 0)
+			this.Subject.next(this.memos.pop());
+		else {
+			this.Subject.complete();
+		}
 	}
 
 	private GetTomorrow(add = 1) {

@@ -22,6 +22,7 @@ import { JsGridComponent } from './shared/modals/find/js-grid/js-grid.component'
 import { SmartTableDatepickerRenderComponent, SmartTableDatepickerComponent } from './shared/modals/find/datapicker/smart-table-datepicker.component';
 import { MemoService } from './shared/services/memo.service';
 import { MessageComponent } from './shared/components/message/message.component';
+import { LoaderComponent } from './shared/components/loader/loader.component';
 
 @NgModule({
 	declarations: [
@@ -35,7 +36,8 @@ import { MessageComponent } from './shared/components/message/message.component'
 		JsGridComponent,
 		SmartTableDatepickerRenderComponent,
 		SmartTableDatepickerComponent,
-		MessageComponent
+		MessageComponent,
+		LoaderComponent
 	],
 	imports: [
 		BrowserModule,

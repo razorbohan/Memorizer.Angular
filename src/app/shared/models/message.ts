@@ -1,6 +1,6 @@
 export class Message {
     constructor(
-        public message: string,
+        public text: string,
         public type: string
     ) { }
 }
