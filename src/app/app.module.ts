@@ -24,6 +24,7 @@ import { MemoService } from './shared/services/memo.service';
 import { MessageComponent } from './shared/components/message/message.component';
 import { LoaderComponent } from './shared/components/loader/loader.component';
 import { ConfirmComponent } from './shared/modals/confirm/confirm.component';
+import { AuthModule } from './auth/auth.module';
 
 @NgModule({
 	declarations: [
@@ -39,7 +40,7 @@ import { ConfirmComponent } from './shared/modals/confirm/confirm.component';
 		SmartTableDatepickerComponent,
 		MessageComponent,
 		LoaderComponent,
-		ConfirmComponent
+		ConfirmComponent,
 	],
 	imports: [
 		BrowserModule,
@@ -50,7 +51,8 @@ import { ConfirmComponent } from './shared/modals/confirm/confirm.component';
 		Ng2SmartTableModule,
 		OwlDateTimeModule,
 		OwlNativeDateTimeModule,
-		FormsModule
+		FormsModule,
+		AuthModule
 	],
 	providers: [MemoService],
 	bootstrap: [AppComponent],
@@ -65,8 +67,10 @@ import { ConfirmComponent } from './shared/modals/confirm/confirm.component';
 })
 export class AppModule { }
 
-//TODO: confirm when deleting
+//TODO: blickering delete button (bind to right)
 //TODO: user login/register
 //TODO: animations (messages, hovers)
 //TODO: big start loader
+//TODO: Find modal
+//TODO: architecture
 //TODO: tests

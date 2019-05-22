@@ -11,13 +11,13 @@ class ApiResponse {
 @Injectable()
 export class MemoService {
 
-	private baseUrl = 'https://localhost:3000/api';
+	private baseUrl = 'https://localhost:44367/api';
 	private memos: Memo[];
 	public memoSubject: BehaviorSubject<{ currentMemo: Memo, count: number }>;
-	public modeSubject: BehaviorSubject<string> ;
+	public modeSubject: BehaviorSubject<string>;
 	public mode: string;
 
-	constructor(private http: HttpClient) { 
+	constructor(private http: HttpClient) {
 		this.mode = 'Repeat';
 		this.modeSubject = new BehaviorSubject<string>(this.mode);
 	}
@@ -153,10 +153,7 @@ export class MemoService {
 
 	private nextMemo() {
 		if (this.memos.length > 0) {
-			if (this.memos.length % 3 == 0)
-				this.memoSubject.complete();
-			else
-				this.memoSubject.next({ currentMemo: this.memos.pop(), count: this.memos.length });
+			this.memoSubject.next({ currentMemo: this.memos.pop(), count: this.memos.length });
 		}
 		else {
 			this.memoSubject.complete();

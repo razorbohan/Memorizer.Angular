@@ -7,16 +7,16 @@
 	</div>
 </div>
 
-<textarea class="col-12" id="questionArea" [ngModel]="currentMemo?.question"
-	(ngModelChange)="currentMemo.question=$event" (focus)="showUpdateGgroup(true)"
-	(blur)="showUpdateGgroup(false)"></textarea>
+<textarea class="col-12" [ngModel]="currentMemo?.question"
+	(ngModelChange)="currentMemo.question=$event" (focus)="showUpdateGroup(true)"
+	(blur)="showUpdateGroup(false)"></textarea>
 
 <div class="row justify-content-around my-2 text-nowrap">
 	<div class="col-3 d-flex justify-content-center align-items-center">
 		<span>Overall: {{count}}</span>
 	</div>
 	<div class="col-3 d-flex justify-content-center">
-		<button (click)="showAnswer()" class="btn btn-primary p-3" id="showAnswer" type="button">Show</button>
+		<button (click)="showAnswer()" class="btn btn-primary p-3" type="button">Show</button>
 	</div>
 	<div class="col-3 d-flex justify-content-center update-group">
 		<div class="btn-group" *ngIf="isShowUpdateGroup || isFocused" (mouseenter)="isFocused=true"
@@ -28,14 +28,15 @@
 				<i class="far fa-save"></i>
 			</button>
 		</div>
-		<button class="btn btn-outline-danger mx-2" type="button" (click)="deleteMemo()" (mouseenter)="isFocused=true"
-			(mouseleave)="isFocused=false">
+		<button class="btn btn-outline-danger mx-2" type="button" (click)="deleteMemo()" >
+			<!-- (mouseenter)="isFocused=true"
+			(mouseleave)="isFocused=false"> -->
 			<i class="fas fa-trash-alt"></i>
 		</button>
 	</div>
 </div>
 
-<textarea class="col-12" *ngIf="isShowAnswer" (focus)="showUpdateGgroup(true)" (blur)="showUpdateGgroup(false)"
+<textarea class="col-12" *ngIf="isShowAnswer" (focus)="showUpdateGroup(true)" (blur)="showUpdateGroup(false)"
 	[ngModel]="currentMemo?.answer" (ngModelChange)="currentMemo.answer=$event"></textarea>
 
 <div *ngIf="isShowAnswer">

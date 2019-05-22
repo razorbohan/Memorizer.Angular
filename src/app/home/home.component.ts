@@ -74,7 +74,7 @@ export class HomeComponent implements OnInit {
 		this.isShowAnswer = this.currentMemo ? true : false;
 	}
 
-	private showUpdateGgroup(isShow: boolean) {
+	private showUpdateGroup(isShow: boolean) {
 		this.isShowUpdateGroup = isShow;
 	}
 
@@ -111,15 +111,16 @@ export class HomeComponent implements OnInit {
 
 	private async deleteMemo() {
 		try {
-			let modalRef = this.modalService.show(ConfirmComponent);
-			let result = modalRef.content.onClose.subscribe(async result => { //TODO: check confirm
-				this.isLoading = true;
-				this.message = await this.memoService.deleteMemo(this.currentMemo);
+			let modalRef = this.modalService.show(ConfirmComponent, { class: 'modal-sm' });
+			let result = modalRef.content.onClose.subscribe(async isConfirmed => {
+				if (isConfirmed) {
+					this.isLoading = true;
+					this.message = await this.memoService.deleteMemo(this.currentMemo);
+					this.isLoading = false;
+				}
 			})
 		} catch (error) {
 			this.message = new Message(error.statusText, 'danger');
-		} finally {
-			this.isLoading = false;
 		}
 	}
 }
