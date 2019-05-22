@@ -65,7 +65,6 @@ import { ConfirmComponent } from './shared/modals/confirm/confirm.component';
 })
 export class AppModule { }
 
-//TODO: finishMessage + mode
 //TODO: confirm when deleting
 //TODO: user login/register
 //TODO: animations (messages, hovers)

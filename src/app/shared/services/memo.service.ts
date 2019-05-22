@@ -13,10 +13,13 @@ export class MemoService {
 
 	private baseUrl = 'https://localhost:3000/api';
 	private memos: Memo[];
-	public Subject = new BehaviorSubject<{ currentMemo: Memo, count: number }>(null);
-	public mode: string = "Repeat";
+	public memoSubject: BehaviorSubject<{ currentMemo: Memo, count: number }>;
+	public modeSubject: BehaviorSubject<string> ;
+	public mode: string;
 
-	constructor(private http: HttpClient) {
+	constructor(private http: HttpClient) { 
+		this.mode = 'Repeat';
+		this.modeSubject = new BehaviorSubject<string>(this.mode);
 	}
 
 	public async getMemos(): Promise<void> {
@@ -32,7 +35,9 @@ export class MemoService {
 
 				let memos = <Memo[]>response.body;
 				this.memos = this.filterMemos(memos);
-				this.nextMemo();
+
+				this.memoSubject = new BehaviorSubject<{ currentMemo: Memo, count: number }>
+					({ currentMemo: this.memos.pop(), count: this.memos.length });
 
 				//return count;
 				resolve();
@@ -42,7 +47,7 @@ export class MemoService {
 
 	public switchMode() {
 		this.mode = this.mode == 'Repeat' ? 'Learn' : 'Repeat';
-		this.getMemos();
+		this.modeSubject.next(this.mode);
 	}
 
 	private filterMemos(memos: Memo[]): Memo[] {
@@ -116,7 +121,7 @@ export class MemoService {
 	}
 
 	public async submitAnswer(answer: string): Promise<Message> {
-		let currentMemo = this.Subject.value.currentMemo;
+		let currentMemo = this.memoSubject.value.currentMemo;
 
 		switch (answer) {
 			case 'Bad':
@@ -137,7 +142,7 @@ export class MemoService {
 				currentMemo.scores++;
 				break;
 			default:
-				console.error(`Wrong answer: '${answer}'`);
+				console.error(`Wrong answer: '${answer}'`); //TODO: to home error
 		}
 
 		let message = await this.updateMemo(currentMemo);
@@ -148,13 +153,13 @@ export class MemoService {
 
 	private nextMemo() {
 		if (this.memos.length > 0) {
-			// if (this.memos.length % 3 == 0)
-			// 	this.Subject.complete();
-			// else
-			this.Subject.next({ currentMemo: this.memos.pop(), count: this.memos.length });
+			if (this.memos.length % 3 == 0)
+				this.memoSubject.complete();
+			else
+				this.memoSubject.next({ currentMemo: this.memos.pop(), count: this.memos.length });
 		}
 		else {
-			this.Subject.complete();
+			this.memoSubject.complete();
 		}
 	}
 

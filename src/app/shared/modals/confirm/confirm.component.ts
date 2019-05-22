@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BsModalRef } from 'ngx-bootstrap/modal';
+import { Subject } from 'rxjs/internal/Subject';
 
 @Component({
   selector: 'memo-confirm',
@@ -8,12 +9,21 @@ import { BsModalRef } from 'ngx-bootstrap/modal';
 })
 export class ConfirmComponent implements OnInit {
 
-  constructor(private modalRef: BsModalRef) { }
+  public onClose: Subject<boolean>;
+
+  constructor(public modalRef: BsModalRef) { }
 
   ngOnInit() {
+    this.onClose = new Subject();
   }
 
-  confirm(){
+  public confirm(): void {
+    this.onClose.next(true);
+    this.modalRef.hide();
+  }
 
+  public cancel(): void {
+    this.onClose.next(false);
+    this.modalRef.hide();
   }
 }

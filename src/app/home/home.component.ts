@@ -17,24 +17,40 @@ export class HomeComponent implements OnInit {
 
 	private currentMemo: Memo = new Memo();
 	private count: number;
-	private isLoading: boolean;
+	private mode: string;
 
+	private isLoading: boolean;
 	private isShowAnswer: boolean;
 	private isShowUpdateGroup: boolean;
 
 	private message: Message;
-
 	private finishModalRef: BsModalRef;
 
 	constructor(private memoService: MemoService,
 		private modalService: BsModalService) { }
 
-	async ngOnInit() {
+	ngOnInit() {
+		this.memoService.modeSubject.subscribe(
+			(mode) => {
+				this.mode = mode;
+				this.clearView();
+				this.subscribeToMemos();
+			}
+		);
+	}
+
+	private clearView() {
+		this.isShowAnswer = false;
+		this.currentMemo = null;
+		this.count = 0;
+	}
+
+	private async subscribeToMemos() {
 		try {
 			this.isLoading = true;
 
 			await this.memoService.getMemos();
-			this.memoService.Subject.subscribe(
+			this.memoService.memoSubject.subscribe(
 				(data) => {
 					this.isShowAnswer = false;
 
@@ -43,9 +59,8 @@ export class HomeComponent implements OnInit {
 				},
 				(e) => console.log(e.message),
 				() => {
-					this.finishModalRef = this.modalService.show(FinishComponent, { initialState: { mode: this.memoService.mode } });
-					this.isShowAnswer = false;
-					this.currentMemo = null;
+					this.finishModalRef = this.modalService.show(FinishComponent, { initialState: { mode: this.mode } });
+					this.clearView();
 				}
 			);
 		} catch (error) {
@@ -55,22 +70,22 @@ export class HomeComponent implements OnInit {
 		}
 	}
 
-	public showAnswer() {
+	private showAnswer() {
 		this.isShowAnswer = this.currentMemo ? true : false;
 	}
 
-	public showUpdateGgroup(isShow: boolean) {
+	private showUpdateGgroup(isShow: boolean) {
 		this.isShowUpdateGroup = isShow;
 	}
 
-	public replaceMemos() {
+	private replaceMemos() {
 		let question = this.currentMemo.question;
 		let answer = this.currentMemo.answer;
 		this.currentMemo.question = answer;
 		this.currentMemo.answer = question;
 	}
 
-	public async submitAnswer(answer: string) {
+	private async submitAnswer(answer: string) {
 		try {
 			this.isLoading = true;
 			let message = await this.memoService.submitAnswer(answer);
@@ -83,7 +98,7 @@ export class HomeComponent implements OnInit {
 		}
 	}
 
-	public async updateMemo() {
+	private async updateMemo() {
 		try {
 			this.isLoading = true;
 			this.message = await this.memoService.updateMemo(this.currentMemo);
@@ -94,11 +109,13 @@ export class HomeComponent implements OnInit {
 		}
 	}
 
-	public async deleteMemo() {
+	private async deleteMemo() {
 		try {
-			this.modalService.show(ConfirmComponent); //TODO: return true/false
-			this.isLoading = true;
-			this.message = await this.memoService.deleteMemo(this.currentMemo);
+			let modalRef = this.modalService.show(ConfirmComponent);
+			let result = modalRef.content.onClose.subscribe(async result => { //TODO: check confirm
+				this.isLoading = true;
+				this.message = await this.memoService.deleteMemo(this.currentMemo);
+			})
 		} catch (error) {
 			this.message = new Message(error.statusText, 'danger');
 		} finally {
