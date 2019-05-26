@@ -1,6 +1,6 @@
 <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
 	<div class="container">
-		<a href="/Home" class="navbar-brand d-flex align-items-center">
+		<a routerLink="/" class="navbar-brand d-flex align-items-center">
 			<img src="assets/img/memo.png" alt="" class="img-fluid" object-fit: contain>
 			<span>Memorizer</span>
 		</a>
@@ -16,17 +16,15 @@
 					<a class="nav-link" (click)="switchMode()">{{showMode()}}</a>
 				</li>
 				<li class="nav-item">
-					<!-- <a class="nav-link" href="" data-toggle="modal" data-target="#addModal">Add</a> -->
 					<a class="nav-link" (click)="openAddModal()">Add</a>
 				</li>
 				<li class="nav-item">
-					<!-- <a class="nav-link" href="" data-toggle="modal" data-target="#findModal">Find</a> -->
 					<a class="nav-link" (click)="openFindModal()">Find</a>
 				</li>
 			</ul>
 			<!-- <% } %> -->
 			<div class="dropdown-divider"></div>
-			<!-- <%- include partials/login_partial.ejs %> -->
+			<memo-login-nav></memo-login-nav>
 		</div>
 	</div>
 </nav>

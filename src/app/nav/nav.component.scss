@@ -12,6 +12,6 @@
   padding-right: 0 !important;
 }
 
-a.nav-link,a.navbar-brand {
+::ng-deep a.nav-link,a.navbar-brand {
   cursor: pointer;
 }

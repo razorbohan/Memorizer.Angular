@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BsModalRef } from 'ngx-bootstrap/modal';
-import { Http } from '@angular/http';
+// import { Http } from '@angular/http';
 
 @Component({
 	selector: 'memo-find',
@@ -11,8 +11,9 @@ export class FindMemoComponent implements OnInit {
 	message: string;
 
 	constructor(
-		public bsModalRef: BsModalRef,
-		private http: Http) { }
+		public bsModalRef: BsModalRef
+		// ,private http: Http) 
+	) { }
 
 	ngOnInit() {
 
@@ -23,8 +24,8 @@ export class FindMemoComponent implements OnInit {
 			console.log("find!!");
 
 			//this.isoading = true;
-			let response = await this.http.get(`/Home/Find/${key}/${value}`).toPromise();
-			this.message = response.toString();
+			// let response = await this.http.get(`/Home/Find/${key}/${value}`).toPromise();
+			// this.message = response.toString();
 
 			// ShowJsGrid(
 			// 	async (filter) => await asyncGet(`/Home/Find/${key}/${value}`),

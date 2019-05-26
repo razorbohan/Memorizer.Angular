@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+
 import { MemoService } from '../shared/services/memo.service';
 import { Memo } from '../shared/models/memo';
-import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { FinishComponent } from '../shared/modals/finish/finish.component';
 import { Message } from '../shared/models/message';
 import { ConfirmComponent } from '../shared/modals/confirm/confirm.component';
@@ -10,8 +11,7 @@ import { ConfirmComponent } from '../shared/modals/confirm/confirm.component';
 @Component({
 	selector: 'memo-home',
 	templateUrl: './home.component.html',
-	styleUrls: ['./home.component.scss'],
-	//providers: [MemoService]
+	styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
 
@@ -19,11 +19,11 @@ export class HomeComponent implements OnInit {
 	private count: number;
 	private mode: string;
 
-	private isLoading: boolean;
+	public isLoading: boolean;
 	private isShowAnswer: boolean;
 	private isShowUpdateGroup: boolean;
 
-	private message: Message;
+	public message: Message;
 	private finishModalRef: BsModalRef;
 
 	constructor(private memoService: MemoService,
