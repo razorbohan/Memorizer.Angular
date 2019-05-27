@@ -9,6 +9,7 @@ import { FinishComponent } from './modals/finish/finish.component';
 import { LoaderComponent } from './components/loader/loader.component';
 import { MessageComponent } from './components/message/message.component';
 import { ClickOutsideDirective } from './directives/click-outside.directive';
+import { SwitcherComponent } from './components/switcher/switcher.component';
 
 @NgModule({
     imports: [
@@ -21,7 +22,8 @@ import { ClickOutsideDirective } from './directives/click-outside.directive';
         FinishComponent,
         LoaderComponent,
         MessageComponent,
-        ClickOutsideDirective
+        ClickOutsideDirective,
+        SwitcherComponent
     ],
     exports: [
         AddMemoComponent,
@@ -29,7 +31,7 @@ import { ClickOutsideDirective } from './directives/click-outside.directive';
         FinishComponent,
         LoaderComponent,
         MessageComponent,
-        //ModalModule
+        SwitcherComponent
     ],
     entryComponents: [
 		AddMemoComponent,
