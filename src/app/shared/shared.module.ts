@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 import { ModalModule } from 'ngx-bootstrap/modal';
 
@@ -14,7 +15,8 @@ import { SwitcherComponent } from './components/switcher/switcher.component';
 @NgModule({
     imports: [
         CommonModule,
-        ModalModule.forRoot()
+        ModalModule.forRoot(),
+        FormsModule
     ],
     declarations: [
         AddMemoComponent,

@@ -1,26 +1,35 @@
 <h2>{{title}}</h2>
 <div class="row">
     <div class="col-md-4">
-        <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
+        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
             <h4>Create a new account.</h4>
             <hr />
-            
+
             <div class="form-group">
-                <label asp-for="Input.Email"></label>
-                <input asp-for="Input.Email" class="form-control" />
-                <span asp-validation-for="Input.Email" class="text-danger"></span>
+                <label for="emial">Email</label>
+                <input type="text" id="email" class="form-control" formControlName="email" placeholder="Input your email" />
+                <div *ngIf="registerForm.get('email').invalid && registerForm.get('email').touched" class="invalid">
+                    <span *ngIf="registerForm.get('email')['errors']['required']">Input your email</span>
+                    <span *ngIf="registerForm.get('email')['errors']['email']">Wrong email address</span>
+                </div>
             </div>
             <div class="form-group">
-                <label asp-for="Input.Password"></label>
-                <input asp-for="Input.Password" class="form-control" />
-                <span asp-validation-for="Input.Password" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Input.ConfirmPassword"></label>
-                <input asp-for="Input.ConfirmPassword" class="form-control" />
-                <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
-            </div>
-            <button type="submit" class="btn btn-outline-secondary">Register</button>
+                <label for="password">Password</label>
+                <input type="text" id="password" class="form-control" formControlName="password" placeholder="Input your password"/>
+                <div *ngIf="registerForm.get('password').invalid && registerForm.get('password').touched" class="invalid">
+                  <span *ngIf="registerForm.get('password')['errors']['required']">Input your new password</span>
+                  <span *ngIf="registerForm.get('password')['errors']['minlength']">Your password is too short</span>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="password">Password</label>
+                <input type="text" id="password" class="form-control" formControlName="password" placeholder="Input your password"/>
+                <div *ngIf="registerForm.get('password').invalid && registerForm.get('password').touched" class="invalid">
+                  <span *ngIf="registerForm.get('password')['errors']['required']">Input your new password</span>
+                  <span *ngIf="registerForm.get('password')['errors']['minlength']">Your password is too short</span>
+                </div>
+              </div>
+            <button type="submit" class="btn btn-outline-secondary" [disabled]="!registerForm.valid">Register</button>
         </form>
     </div>
 </div>

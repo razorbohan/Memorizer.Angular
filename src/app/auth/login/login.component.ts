@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators} from '@angular/forms';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormGroup, Validators, FormControl } from '@angular/forms';
+import { SwitcherComponent } from 'src/app/shared/components/switcher/switcher.component';
 
 @Component({
   selector: 'memo-login',
@@ -10,12 +11,21 @@ export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) { }
+  @ViewChild(SwitcherComponent)
+  private rememberMe: SwitcherComponent;
+
+  constructor() { }
 
   ngOnInit() {
-    this.loginForm = this.formBuilder.group({
-      email: ["email", Validators.required, Validators.email],
-      password: ["password", Validators.required, Validators.minLength(6)]
-    })
+    this.loginForm = new FormGroup({
+      'email': new FormControl(null, [Validators.required, Validators.email]),
+      'password': new FormControl(null, [Validators.required, Validators.minLength(6)])
+    });
+  }
+
+  onSubmit() {
+    const formData = this.loginForm.value;
+    console.log(formData);
+    console.log(this.rememberMe.isChecked);
   }
 }

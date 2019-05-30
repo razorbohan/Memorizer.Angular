@@ -80,3 +80,4 @@ export class AppModule { }
 //TODO: animations (messages, hovers)
 //TODO: Find modal
 //TODO: tests
+//TODO: angular materials (mat-toolbar-row)
