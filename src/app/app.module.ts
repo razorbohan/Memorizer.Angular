@@ -28,6 +28,7 @@ import { TokenInterceptorService } from './shared/services/token-interceptor.ser
 import { HomeModule } from './home/home.module';
 import { NavModule } from './nav/nav.module';
 import { AuthService } from './shared/services/auth.service';
+import { HomeGuard } from './shared/services/home.guard';
 import { AuthGuard } from './shared/services/auth.guard';
 // import { MessageComponent } from './shared/components/message/message.component';
 // import { LoaderComponent } from './shared/components/loader/loader.component';
@@ -68,6 +69,7 @@ import { AuthGuard } from './shared/services/auth.guard';
 	providers: [
 		MemoService,
 		AuthService,
+		HomeGuard,
 		AuthGuard,
 		{
 			provide: HTTP_INTERCEPTORS,
@@ -86,6 +88,7 @@ import { AuthGuard } from './shared/services/auth.guard';
 })
 export class AppModule { }
 
+//TODO: update nav after login
 //TODO: user login/register
 //TODO: async validation
 //TODO: связь компонентов через memoService

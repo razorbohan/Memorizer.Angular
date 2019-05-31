@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
   selector: 'memo-login-nav',
@@ -7,9 +8,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginNavComponent implements OnInit {
 
-  constructor() { }
+  username: string;
+
+  constructor(private authService: AuthService) { }
 
   ngOnInit() {
+    if (this.authService.isLoggedIn()) {
+      let { username } = JSON.parse(this.authService.isLoggedIn());
+      this.username = username;
+    }
   }
 
+  logout() {
+    this.authService.logout();
+    this.username = '';
+  }
 }

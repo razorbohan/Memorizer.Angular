@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { SwitcherComponent } from 'src/app/shared/components/switcher/switcher.component';
 import { AuthService } from 'src/app/shared/services/auth.service';
+import { Message } from 'src/app/shared/models/message';
 
 @Component({
   selector: 'memo-login',
@@ -11,6 +12,8 @@ import { AuthService } from 'src/app/shared/services/auth.service';
 export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
+  errorMessage: Message;
+  isLoading: boolean;
 
   @ViewChild(SwitcherComponent)
   private rememberMe: SwitcherComponent;
@@ -25,7 +28,14 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  onSubmit() {
-    this.authService.login({ ...this.loginForm.value, rememberMe: this.rememberMe.isChecked });
+  async onSubmit() {
+    try {
+      this.isLoading = true;
+      await this.authService.login({ ...this.loginForm.value, rememberMe: this.rememberMe.isChecked });
+    } catch (error) {
+      this.errorMessage = new Message(error, 'danger');
+    } finally {
+      this.isLoading = false;
+    }
   }
 }
