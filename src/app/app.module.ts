@@ -1,6 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+
 //import { HttpModule } from '@angular/http';
 // import { FormsModule } from '@angular/forms';
 
@@ -22,8 +24,11 @@ import { AuthModule } from './auth/auth.module';
 // import { JsGridComponent } from './shared/modals/find/js-grid/js-grid.component';
 // import { SmartTableDatepickerRenderComponent, SmartTableDatepickerComponent } from './shared/modals/find/datapicker/smart-table-datepicker.component';
 import { MemoService } from './shared/services/memo.service';
+import { TokenInterceptorService } from './shared/services/token-interceptor.service';
 import { HomeModule } from './home/home.module';
 import { NavModule } from './nav/nav.module';
+import { AuthService } from './shared/services/auth.service';
+import { AuthGuard } from './shared/services/auth.guard';
 // import { MessageComponent } from './shared/components/message/message.component';
 // import { LoaderComponent } from './shared/components/loader/loader.component';
 // import { ConfirmComponent } from './shared/modals/confirm/confirm.component';
@@ -60,7 +65,15 @@ import { NavModule } from './nav/nav.module';
 		HomeModule,
 		NavModule
 	],
-	providers: [MemoService],
+	providers: [
+		MemoService,
+		AuthService,
+		AuthGuard,
+		{
+			provide: HTTP_INTERCEPTORS,
+			useClass: TokenInterceptorService,
+			multi: true
+		}],
 	bootstrap: [AppComponent],
 	// entryComponents: [
 	// 	AddMemoComponent,
