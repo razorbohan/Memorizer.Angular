@@ -9,8 +9,9 @@ import { ConfirmComponent } from './modals/confirm/confirm.component';
 import { FinishComponent } from './modals/finish/finish.component';
 import { LoaderComponent } from './components/loader/loader.component';
 import { MessageComponent } from './components/message/message.component';
-import { ClickOutsideDirective } from './directives/click-outside.directive';
 import { SwitcherComponent } from './components/switcher/switcher.component';
+import { ClickOutsideDirective } from './directives/click-outside.directive';
+import { BigLoaderComponent } from './components/big-loader/big-loader.component';
 
 @NgModule({
     imports: [
@@ -24,8 +25,9 @@ import { SwitcherComponent } from './components/switcher/switcher.component';
         FinishComponent,
         LoaderComponent,
         MessageComponent,
+        SwitcherComponent,
         ClickOutsideDirective,
-        SwitcherComponent
+        // BigLoaderComponent
     ],
     exports: [
         AddMemoComponent,

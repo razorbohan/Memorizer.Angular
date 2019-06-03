@@ -10,7 +10,7 @@ export class HomeGuard implements CanActivate {
     private router: Router) { }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | Observable<boolean> {
-    if (this.authService.isLoggedIn()) {
+    if (this.authService.isLoggedIn) {
       return true
     }
     else {

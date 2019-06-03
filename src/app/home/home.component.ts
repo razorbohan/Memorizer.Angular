@@ -1,30 +1,33 @@
-import { Component, OnInit } from '@angular/core';
-import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+import { Component, OnInit, HostBinding } from '@angular/core';
+import { BsModalService } from 'ngx-bootstrap/modal';
 
 import { MemoService } from '../shared/services/memo.service';
 import { Memo } from '../shared/models/memo';
-import { FinishComponent } from '../shared/modals/finish/finish.component';
 import { Message } from '../shared/models/message';
+import { FinishComponent } from '../shared/modals/finish/finish.component';
 import { ConfirmComponent } from '../shared/modals/confirm/confirm.component';
+import { fadeTrigger } from '../shared/animations/fade.animation';
 
 
 @Component({
 	selector: 'memo-home',
 	templateUrl: './home.component.html',
-	styleUrls: ['./home.component.scss']
+	styleUrls: ['./home.component.scss'],
+	animations: [fadeTrigger]
 })
 export class HomeComponent implements OnInit {
 
-	private currentMemo: Memo = new Memo();
-	private count: number;
-	private mode: string;
+	@HostBinding('@fade') anim = true;
 
-	public isLoading: boolean;
-	private isShowAnswer: boolean;
-	private isShowUpdateGroup: boolean;
+	currentMemo: Memo = new Memo();
+	count: number;
+	mode: string;
 
-	public message: Message;
-	private finishModalRef: BsModalRef;
+	isLoading: boolean;
+	isShowAnswer: boolean;
+	isShowUpdateGroup: boolean;
+
+	message: Message;
 
 	constructor(private memoService: MemoService,
 		private modalService: BsModalService) { }
@@ -59,60 +62,60 @@ export class HomeComponent implements OnInit {
 				},
 				(e) => console.log(e.message),
 				() => {
-					this.finishModalRef = this.modalService.show(FinishComponent, { initialState: { mode: this.mode } });
+					this.modalService.show(FinishComponent, { initialState: { mode: this.mode } });
 					this.clearView();
 				}
 			);
 		} catch (error) {
-			this.message = new Message(`Error getting memos: ${error}`, 'danger')
+			this.message = new Message(`Error getting memos: ${error.message}`, 'danger')
 		} finally {
 			this.isLoading = false;
 		}
 	}
 
-	private showAnswer() {
+	showAnswer() {
 		this.isShowAnswer = this.currentMemo ? true : false;
 	}
 
-	private showUpdateGroup(isShow: boolean) {
+	showUpdateGroup(isShow: boolean) {
 		this.isShowUpdateGroup = isShow;
 	}
 
-	private replaceMemos() {
+	replaceMemos() {
 		let question = this.currentMemo.question;
 		let answer = this.currentMemo.answer;
 		this.currentMemo.question = answer;
 		this.currentMemo.answer = question;
 	}
 
-	private async submitAnswer(answer: string) {
+	async submitAnswer(answer: string) {
 		try {
 			this.isLoading = true;
-			let message = await this.memoService.submitAnswer(answer);
+			let message = await this.memoService.submitAnswer('123');
 			if (message.type == 'danger')
 				this.message = message;
 		} catch (error) {
-			this.message = new Message(error.statusText, 'danger');
+			this.message = new Message(error.message, 'danger');
 		} finally {
 			this.isLoading = false;
 		}
 	}
 
-	private async updateMemo() {
+	async updateMemo() {
 		try {
 			this.isLoading = true;
 			this.message = await this.memoService.updateMemo(this.currentMemo);
 		} catch (error) {
-			this.message = new Message(error.statusText, 'danger');
+			this.message = new Message(error.message, 'danger');
 		} finally {
 			this.isLoading = false;
 		}
 	}
 
-	private async deleteMemo() {
+	async deleteMemo() {
 		try {
 			let modalRef = this.modalService.show(ConfirmComponent, { class: 'modal-sm' });
-			let result = modalRef.content.onClose.subscribe(async isConfirmed => {
+			modalRef.content.onClose.subscribe(async isConfirmed => {
 				if (isConfirmed) {
 					this.isLoading = true;
 					this.message = await this.memoService.deleteMemo(this.currentMemo);
@@ -120,7 +123,7 @@ export class HomeComponent implements OnInit {
 				}
 			})
 		} catch (error) {
-			this.message = new Message(error.statusText, 'danger');
+			this.message = new Message(error.message, 'danger');
 		}
 	}
 }

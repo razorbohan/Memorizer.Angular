@@ -7,9 +7,8 @@
 	</div>
 </div>
 
-<textarea class="col-12" [ngModel]="currentMemo?.question"
-	(ngModelChange)="currentMemo.question=$event" (focus)="showUpdateGroup(true)"
-	(blur)="showUpdateGroup(false)"></textarea>
+<textarea class="col-12" [ngModel]="currentMemo?.question" (ngModelChange)="currentMemo.question=$event"
+	(focus)="showUpdateGroup(true)" (blur)="showUpdateGroup(false)"></textarea>
 
 <div class="row justify-content-around my-2 text-nowrap">
 	<div class="col-3 d-flex justify-content-center align-items-center">
@@ -28,25 +27,22 @@
 				<i class="far fa-save"></i>
 			</button>
 		</div>
-		<button class="btn btn-outline-danger" type="button" (click)="deleteMemo()" >
-			<!-- (mouseenter)="isFocused=true"
-			(mouseleave)="isFocused=false"> -->
+		<button class="btn btn-outline-danger" type="button" (click)="deleteMemo()">
 			<i class="fas fa-trash-alt"></i>
 		</button>
 	</div>
 </div>
 
-<textarea class="col-12" *ngIf="isShowAnswer" (focus)="showUpdateGroup(true)" (blur)="showUpdateGroup(false)"
-	[ngModel]="currentMemo?.answer" (ngModelChange)="currentMemo.answer=$event"></textarea>
+<div @fade *ngIf="isShowAnswer">
+	<textarea class="col-12" (focus)="showUpdateGroup(true)" (blur)="showUpdateGroup(false)"
+		[ngModel]="currentMemo?.answer" (ngModelChange)="currentMemo.answer=$event"></textarea>
 
-<div *ngIf="isShowAnswer">
 	<div class="row">
 		<div class="mx-auto my-2">
 			<div class="answer-group btn-group">
-				<div *ngIf="mode == 'Repeat'">
-					<button class="btn btn-danger" (click)="submitAnswer('Bad')">Bad</button>
-					<button class="btn btn-warning" (click)="submitAnswer('Tomorrow')">Tomorrow</button>
-				</div>
+				<button *ngIf="mode == 'Repeat'" class="btn btn-danger" (click)="submitAnswer('Bad')">Bad</button>
+				<button *ngIf="mode == 'Repeat'" class="btn btn-warning"
+					(click)="submitAnswer('Tomorrow')">Tomorrow</button>
 				<button class="btn btn-primary" (click)="submitAnswer('Later')">Later</button>
 				<button class="btn btn-success" (click)="submitAnswer('Cool')">Cool</button>
 			</div>

@@ -5,12 +5,16 @@
             <h4>Create a new account.</h4>
             <hr />
 
+            <alert-message [message]="errorMessage"></alert-message>
+
             <div class="form-group">
                 <label for="emial">Email</label>
                 <input type="text" id="email" class="form-control" formControlName="email" placeholder="Input your email" />
+                <memo-loader [isLoading]="this.isCheckingEmail"></memo-loader>
                 <div *ngIf="registerForm.get('email').invalid && registerForm.get('email').touched" class="invalid">
                     <span *ngIf="registerForm.get('email')['errors']['required']">Input your email</span>
                     <span *ngIf="registerForm.get('email')['errors']['email']">Wrong email address</span>
+                    <span *ngIf="registerForm.get('email')['errors']['isUsed']">Email already is used</span>
                 </div>
             </div>
             <div class="form-group">
@@ -30,5 +34,6 @@
               </div>
             <button type="submit" class="btn btn-outline-secondary" [disabled]="!registerForm.valid">Register</button>
         </form>
+        <memo-loader [isLoading]="this.isLoading"></memo-loader>
     </div>
 </div>

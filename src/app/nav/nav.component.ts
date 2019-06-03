@@ -13,6 +13,7 @@ export class NavComponent {
 
 	addModalRef: BsModalRef;
 	findModalRef: BsModalRef;
+	isOpenMenu: boolean;
 
 	constructor(
 		private modalService: BsModalService,
@@ -33,5 +34,9 @@ export class NavComponent {
 
 	switchMode() {
 		this.memoService.switchMode();
+	}
+
+	closeMenu() {
+		this.isOpenMenu = false;
 	}
 }

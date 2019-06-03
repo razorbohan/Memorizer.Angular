@@ -75,7 +75,7 @@ export class MemoService {
 					else //return new Message(`Error updating memo: ${response.error}`, 'danger')
 						resolve(new Message(`Error updating memo: ${response.error}`, 'danger'));
 				} catch (error) {
-					//return new Message(`Error updating memo: ${error.status}: ${error.statusText}`, 'error');
+					//return new Message(`Error updating memo: ${error.status}: ${error.statusText}`, 'danger');
 					resolve(new Message(`Error updating memo: ${error.status}: ${error.statusText}`, 'danger'));
 				}
 			}, 1000);
@@ -93,8 +93,8 @@ export class MemoService {
 					else //return new Message(`Error adding memo: ${response.error}`, 'danger')
 						resolve(new Message(`Error adding memo: ${response.error}`, 'danger'));
 				} catch (error) {
-					//return new Message(`Error adding memo: ${error.status}: ${error.statusText}`, 'error');
-					resolve(new Message(`Error adding memo: ${error.status}: ${error.statusText}`, 'error'));
+					//return new Message(`Error adding memo: ${error.status}: ${error.statusText}`, 'danger');
+					resolve(new Message(`Error adding memo: ${error.status}: ${error.statusText}`, 'danger'));
 				}
 			}, 1000);
 		});
@@ -111,8 +111,8 @@ export class MemoService {
 					else //return new Message(`Error deleting memo: ${response.error}`, 'danger')
 						resolve(new Message(`Error deleting memo: ${response.error}`, 'danger'));
 				} catch (error) {
-					//return new Message(`Error deleting memo: ${error.status}: ${error.statusText}`, 'error');
-					resolve(new Message(`Error deleting memo: ${error.status}: ${error.statusText}`, 'error'));
+					//return new Message(`Error deleting memo: ${error.status}: ${error.statusText}`, 'danger');
+					resolve(new Message(`Error deleting memo: ${error.status}: ${error.statusText}`, 'danger'));
 				} finally {
 					this.nextMemo();
 				}
@@ -142,7 +142,9 @@ export class MemoService {
 				currentMemo.scores++;
 				break;
 			default:
-				console.error(`Wrong answer: '${answer}'`); //TODO: to home error
+				throw new Error(`Wrong answer: '${answer}'`);
+			//resolve(new Message(`Wrong answer: '${answer}`, 'danger'));
+			//return;
 		}
 
 		let message = await this.updateMemo(currentMemo);

@@ -30,6 +30,8 @@ import { NavModule } from './nav/nav.module';
 import { AuthService } from './shared/services/auth.service';
 import { HomeGuard } from './shared/services/home.guard';
 import { AuthGuard } from './shared/services/auth.guard';
+import { ClickOutsideDirective } from './shared/directives/click-outside.directive';
+import { BigLoaderComponent } from './shared/components/big-loader/big-loader.component';
 // import { MessageComponent } from './shared/components/message/message.component';
 // import { LoaderComponent } from './shared/components/loader/loader.component';
 // import { ConfirmComponent } from './shared/modals/confirm/confirm.component';
@@ -38,6 +40,7 @@ import { AuthGuard } from './shared/services/auth.guard';
 @NgModule({
 	declarations: [
 		AppComponent,
+	    BigLoaderComponent
 		// NavComponent,
 		// HomeComponent,
 		// ClickOutsideDirective,
@@ -88,12 +91,10 @@ import { AuthGuard } from './shared/services/auth.guard';
 })
 export class AppModule { }
 
-//TODO: update nav after login
-//TODO: user login/register
-//TODO: async validation
-//TODO: связь компонентов через memoService
-//TODO: big start loader
+//TODO: ClickOutsideDirective error
 //TODO: animations (messages, hovers)
-//TODO: Find modal
-//TODO: tests
+//TODO: config file
 //TODO: angular materials (mat-toolbar-row)
+//TODO: Find modal
+//TODO: 3d-party login?
+//TODO: tests

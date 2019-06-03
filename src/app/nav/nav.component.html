@@ -5,11 +5,11 @@
 			<span>Memorizer</span>
 		</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse"
-			aria-label="Toggle navigation" (click)="isOpenMenu=undefined">
+			aria-label="Toggle navigation" (click-outside)="closeMenu()" (click)="this.isOpenMenu=undefined">
 			<span class="navbar-toggler-icon"></span>
 		</button>
 
-		<div class="collapse navbar-collapse" [class.show]="isOpenMenu">
+		<div class="collapse navbar-collapse" [class.show]="this.isOpenMenu">
 			<!-- <%if (locals.mode) { %> -->
 			<ul class="navbar-nav">
 				<li class="nav-item">
