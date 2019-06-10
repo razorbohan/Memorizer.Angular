@@ -8,9 +8,11 @@ import { BsModalRef } from 'ngx-bootstrap/modal';
 })
 export class FinishComponent implements OnInit {
 
-  constructor(public modalRef: BsModalRef) { }
+  constructor(private modalRef: BsModalRef) { }
 
-  ngOnInit() {
-    
+  ngOnInit() { }
+
+  hide() {
+    this.modalRef.hide()
   }
 }

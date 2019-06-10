@@ -11,7 +11,6 @@ import { LoaderComponent } from './components/loader/loader.component';
 import { MessageComponent } from './components/message/message.component';
 import { SwitcherComponent } from './components/switcher/switcher.component';
 import { ClickOutsideDirective } from './directives/click-outside.directive';
-import { BigLoaderComponent } from './components/big-loader/big-loader.component';
 
 @NgModule({
     imports: [
@@ -27,7 +26,6 @@ import { BigLoaderComponent } from './components/big-loader/big-loader.component
         MessageComponent,
         SwitcherComponent,
         ClickOutsideDirective,
-        // BigLoaderComponent
     ],
     exports: [
         AddMemoComponent,
@@ -35,7 +33,8 @@ import { BigLoaderComponent } from './components/big-loader/big-loader.component
         FinishComponent,
         LoaderComponent,
         MessageComponent,
-        SwitcherComponent
+        SwitcherComponent,
+        ClickOutsideDirective
     ],
     entryComponents: [
 		AddMemoComponent,

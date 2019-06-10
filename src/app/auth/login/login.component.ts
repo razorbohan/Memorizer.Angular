@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
       this.isLoading = true;
       await this.authService.login({ ...this.loginForm.value, rememberMe: this.rememberMe.isChecked });
     } catch (error) {
-      this.errorMessage = new Message(error, 'danger');
+      this.errorMessage = new Message(error.message, 'danger');
     } finally {
       this.isLoading = false;
     }

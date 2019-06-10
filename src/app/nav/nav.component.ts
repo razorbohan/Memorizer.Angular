@@ -1,13 +1,16 @@
 import { Component } from '@angular/core';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+
 import { AddMemoComponent } from '../shared/modals/add/add.component';
 import { FindMemoComponent } from '../shared/modals/find/find.component';
 import { MemoService } from '../shared/services/memo.service';
+import { fadeAnimation } from '../shared/animations/fade.animation';
 
 @Component({
 	selector: 'memo-nav',
 	templateUrl: './nav.component.html',
-	styleUrls: ['./nav.component.scss']
+	styleUrls: ['./nav.component.scss'],
+	animations: [fadeAnimation]
 })
 export class NavComponent {
 

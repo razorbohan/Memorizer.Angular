@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { Observable, Subject, BehaviorSubject } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
+
+import { environment } from '../../../environments/environment';
 
 interface ApiResponse {
   success: boolean;
@@ -12,7 +14,7 @@ interface ApiResponse {
 @Injectable()
 export class AuthService {
 
-  baseUrl = 'https://localhost:44367/api';
+  baseUrl = environment.baseUrl;
   isLoggedIn: boolean;
   loginDataSubject: BehaviorSubject<{ username: string, token: string }>;
 

@@ -11,8 +11,8 @@ import { Message } from '../../models/message';
 })
 export class AddMemoComponent implements OnInit {
 
-  private message: Message;
-  private isLoading: boolean;
+  message: Message;
+  isLoading: boolean;
 
   constructor(
     private modalRef: BsModalRef,
@@ -34,5 +34,9 @@ export class AddMemoComponent implements OnInit {
       newAnswer.value = '';
       //this.modalRef.hide();
     }
+  }
+
+  hide() {
+    this.modalRef.hide()
   }
 }

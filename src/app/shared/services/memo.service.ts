@@ -2,7 +2,9 @@ import { Injectable } from '@angular/core';
 import { Memo, PostponeLevels } from '../models/memo';
 import { BehaviorSubject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+
 import { Message } from '../models/message';
+import { environment } from '../../../environments/environment';
 
 class ApiResponse {
 	constructor(public success: boolean, public body: Object, public error: string) { }
@@ -11,7 +13,7 @@ class ApiResponse {
 @Injectable()
 export class MemoService {
 
-	private baseUrl = 'https://localhost:44367/api';
+	private baseUrl = environment.baseUrl;
 	private memos: Memo[];
 	public memoSubject: BehaviorSubject<{ currentMemo: Memo, count: number }>;
 	public modeSubject: BehaviorSubject<string>;

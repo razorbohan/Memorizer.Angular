@@ -1,12 +1,12 @@
 import { Component, OnInit, Input, HostBinding } from '@angular/core';
 import { Message } from '../../models/message';
-import { fadeTrigger } from '../../animations/fade.animation';
+import { fadeAnimation } from '../../animations/fade.animation';
 
 @Component({
   selector: 'alert-message',
   templateUrl: './message.component.html',
   styleUrls: ['./message.component.scss'],
-  animations: [fadeTrigger]
+  animations: [fadeAnimation]
 })
 export class MessageComponent implements OnInit {
 

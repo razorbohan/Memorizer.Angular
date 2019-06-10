@@ -34,7 +34,7 @@ export class RegisterComponent implements OnInit {
       this.isLoading = true;
       await this.authService.register(this.registerForm.value);
     } catch (error) {
-      this.errorMessage = new Message(error, 'danger');
+      this.errorMessage = new Message(error.message, 'danger');
     } finally {
       this.isLoading = false;
     }
@@ -56,7 +56,7 @@ export class RegisterComponent implements OnInit {
       let isUsed = await this.authService.checkEmail(control.value);
       return isUsed ? { 'isUsed': true } : null;
     } catch (error) {
-      this.errorMessage = new Message(error, 'danger');
+      this.errorMessage = new Message(error.message, 'danger');
     } finally {
       this.isCheckingEmail = false;
     }

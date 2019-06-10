@@ -7,9 +7,9 @@ import { AuthComponent } from './auth.component';
 import { AuthGuard } from '../shared/services/auth.guard';
 
 const routes: Routes = [{
-    path: "Auth", canActivate: [AuthGuard], component: AuthComponent, children: [
-        { path: "Login", component: LoginComponent },
-        { path: "Register", component: RegisterComponent }
+    path: "Auth", canActivate: [AuthGuard], component: AuthComponent, data: { animation: 'Auth' }, children: [
+        { path: "Login", component: LoginComponent, data: { animation: 'Login' } },
+        { path: "Register", component: RegisterComponent, data: { animation: 'Register' } }
     ]
 }];
 

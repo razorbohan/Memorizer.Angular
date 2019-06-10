@@ -1,19 +1,19 @@
-import { Component, OnInit, HostBinding } from '@angular/core';
-import { fadeTrigger } from '../shared/animations/fade.animation';
+import { Component, OnInit } from '@angular/core';
+import { routeAnimations } from '../shared/animations/route.animation';
 
 @Component({
   selector: 'memo-auth',
   templateUrl: './auth.component.html',
   styleUrls: ['./auth.component.scss'],
-  animations: [fadeTrigger]
+  animations: [routeAnimations]
 })
 export class AuthComponent implements OnInit {
 
-  @HostBinding('@fade') a = true;
-
   constructor() { }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
+  handleRouteAnimation(outlet) {
+    return outlet && outlet.activatedRouteData && outlet.activatedRouteData['animation'];
+  }
 }

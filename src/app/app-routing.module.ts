@@ -5,7 +5,7 @@ import { HomeGuard } from './shared/services/home.guard';
 
 const routes: Routes = [
 	{ path: "", redirectTo: "Home", pathMatch: "full" },
-	{ path: "Home", canActivate: [HomeGuard], component: HomeComponent }
+	{ path: "Home", canActivate: [HomeGuard], component: HomeComponent, data: { animation: 'Home' } }
 ];
 
 @NgModule({

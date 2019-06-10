@@ -1,4 +1,4 @@
-import { Component, OnInit, HostBinding } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { BsModalService } from 'ngx-bootstrap/modal';
 
 import { MemoService } from '../shared/services/memo.service';
@@ -6,18 +6,15 @@ import { Memo } from '../shared/models/memo';
 import { Message } from '../shared/models/message';
 import { FinishComponent } from '../shared/modals/finish/finish.component';
 import { ConfirmComponent } from '../shared/modals/confirm/confirm.component';
-import { fadeTrigger } from '../shared/animations/fade.animation';
-
+import { fadeAnimation } from '../shared/animations/fade.animation';
 
 @Component({
 	selector: 'memo-home',
 	templateUrl: './home.component.html',
 	styleUrls: ['./home.component.scss'],
-	animations: [fadeTrigger]
+	animations: [fadeAnimation]
 })
 export class HomeComponent implements OnInit {
-
-	@HostBinding('@fade') anim = true;
 
 	currentMemo: Memo = new Memo();
 	count: number;
@@ -26,6 +23,7 @@ export class HomeComponent implements OnInit {
 	isLoading: boolean;
 	isShowAnswer: boolean;
 	isShowUpdateGroup: boolean;
+	isFocused: boolean;
 
 	message: Message;
 
@@ -91,7 +89,7 @@ export class HomeComponent implements OnInit {
 	async submitAnswer(answer: string) {
 		try {
 			this.isLoading = true;
-			let message = await this.memoService.submitAnswer('123');
+			let message = await this.memoService.submitAnswer('123'); //TODO: fix
 			if (message.type == 'danger')
 				this.message = message;
 		} catch (error) {

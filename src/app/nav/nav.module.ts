@@ -8,7 +8,6 @@ import { FindModule } from '../shared/modals/find/find.module';
 import { NavComponent } from './nav.component';
 import { LoginNavComponent } from './login-nav/login-nav.component';
 import { SharedModule } from '../shared/shared.module';
-import { ClickOutsideDirective } from '../shared/directives/click-outside.directive';
 
 @NgModule({
   declarations: [
@@ -18,7 +17,8 @@ import { ClickOutsideDirective } from '../shared/directives/click-outside.direct
   imports: [
     CommonModule,
     RouterModule,
-    FindModule
+    FindModule,
+    SharedModule
   ],
   exports: [
     FindModule,
