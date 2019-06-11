@@ -89,7 +89,7 @@ export class HomeComponent implements OnInit {
 	async submitAnswer(answer: string) {
 		try {
 			this.isLoading = true;
-			let message = await this.memoService.submitAnswer('123'); //TODO: fix
+			let message = await this.memoService.submitAnswer(answer);
 			if (message.type == 'danger')
 				this.message = message;
 		} catch (error) {

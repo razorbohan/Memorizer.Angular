@@ -1,11 +1,24 @@
-.modal-body {
-  input,
-  select {
-    margin-right: 10px;
-  }
+// .modal-body {
+//   input,
+//   select {
+//     margin-right: 10px;
+//   }
 
-  .jsgrid-cell {
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
+//   .jsgrid-cell {
+//     overflow: hidden;
+//     text-overflow: ellipsis;
+//   }
+// }
+
+table {
+  width: 100%;
+}
+
+.mat-form-field.findInput {
+  font-size: 14px;
+  width: 100%;
+}
+
+th.mat-sort-header-sorted {
+  color: black;
 }

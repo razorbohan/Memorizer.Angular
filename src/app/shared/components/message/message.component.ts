@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, HostBinding } from '@angular/core';
+import { Component, Input, OnChanges } from '@angular/core';
 import { Message } from '../../models/message';
 import { fadeAnimation } from '../../animations/fade.animation';
 
@@ -8,16 +8,22 @@ import { fadeAnimation } from '../../animations/fade.animation';
   styleUrls: ['./message.component.scss'],
   animations: [fadeAnimation]
 })
-export class MessageComponent implements OnInit {
+export class MessageComponent implements OnChanges {
+
+  canBeClosed: boolean;
 
   constructor() { }
 
   @Input() message: Message;
 
-  ngOnInit() {
+  ngOnChanges() {
+    setTimeout(() => this.canBeClosed = true, 1000);
   }
 
   private hideMessage() {
-    this.message = null;
+    if (this.canBeClosed) {
+      this.message = null;
+      this.canBeClosed = false;
+    }
   }
 }

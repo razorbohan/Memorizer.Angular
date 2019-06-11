@@ -41,8 +41,7 @@
 		<div class="mx-auto my-2">
 			<div class="answer-group btn-group">
 				<button *ngIf="mode == 'Repeat'" class="btn btn-danger" (click)="submitAnswer('Bad')">Bad</button>
-				<button *ngIf="mode == 'Repeat'" class="btn btn-warning"
-					(click)="submitAnswer('Tomorrow')">Tomorrow</button>
+				<button *ngIf="mode == 'Repeat'" class="btn btn-warning" (click)="submitAnswer('Tomorrow')">Tomorrow</button>
 				<button class="btn btn-primary" (click)="submitAnswer('Later')">Later</button>
 				<button class="btn btn-success" (click)="submitAnswer('Cool')">Cool</button>
 			</div>

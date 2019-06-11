@@ -52,7 +52,7 @@ export class MemoService {
 		this.modeSubject.next(this.mode);
 	}
 
-	private filterMemos(memos: Memo[]): Memo[] {
+	public filterMemos(memos: Memo[]): Memo[] {
 		return memos
 			.filter((memo) => {
 				return new Date(memo.repeatDate) < new Date()

@@ -16,6 +16,7 @@ import { HomeGuard } from './shared/services/home.guard';
 import { AuthGuard } from './shared/services/auth.guard';
 
 import { BigLoaderComponent } from './shared/components/big-loader/big-loader.component';
+import { FindModule } from './shared/modals/find/find.module';
 
 @NgModule({
 	declarations: [
@@ -28,7 +29,8 @@ import { BigLoaderComponent } from './shared/components/big-loader/big-loader.co
 		BrowserAnimationsModule,
 		AuthModule,
 		HomeModule,
-		NavModule
+		NavModule,
+		FindModule
 	],
 	providers: [
 		MemoService,
@@ -52,8 +54,6 @@ import { BigLoaderComponent } from './shared/components/big-loader/big-loader.co
 })
 export class AppModule { }
 
-//TODO: click-outsie home message error
-//TODO: finish mode
 //TODO: Find modal
 //TODO: angular materials (mat-toolbar-row)
 //TODO: 3d-party login?
