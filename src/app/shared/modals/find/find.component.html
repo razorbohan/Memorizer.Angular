@@ -21,7 +21,21 @@
 
 			<ng-container matColumnDef="question">
 				<th mat-header-cell *matHeaderCellDef mat-sort-header> Question </th>
-				<td mat-cell *matCellDef="let element"> {{element.question}} </td>
+				<td mat-cell *matCellDef="let element;let index=index">
+					<editable (update)="updateField(index, element, 'question')">
+						<ng-template viewMode>
+							{{element.question}}
+						</ng-template>
+						<ng-template editMode>
+							<mat-form-field>
+								<input matInput editableOnEnter [formControl]="getControl(index, 'question')">
+								<mat-error *ngIf="getControl(index, 'question').hasError('required')">
+									Field is <strong>required</strong>
+								</mat-error>
+							</mat-form-field>
+						</ng-template>
+					</editable>
+				</td>
 			</ng-container>
 
 			<ng-container matColumnDef="answer">
@@ -55,5 +69,7 @@
 		</table>
 	</div>
 
-	<mat-paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+	<mat-paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons
+		[ngStyle]="{'visibility':isLoading ? 'hidden' : 'visible'}">
+	</mat-paginator>
 </div>
