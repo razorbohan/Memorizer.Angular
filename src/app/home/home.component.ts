@@ -50,7 +50,7 @@ export class HomeComponent implements OnInit {
 		try {
 			this.isLoading = true;
 
-			await this.memoService.getMemos();
+			await this.memoService.init();
 			this.memoService.memoSubject.subscribe(
 				(data) => {
 					this.isShowAnswer = false;

@@ -1,7 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http'; 
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -15,18 +16,19 @@ import { TokenInterceptorService } from './shared/services/token-interceptor.ser
 import { HomeGuard } from './shared/services/home.guard';
 import { AuthGuard } from './shared/services/auth.guard';
 
-import { BigLoaderComponent } from './shared/components/big-loader/big-loader.component';
+// import { BigLoaderComponent } from './shared/components/big-loader/big-loader.component';
 import { FindModule } from './shared/modals/find/find.module';
 
 @NgModule({
 	declarations: [
 		AppComponent,
-		BigLoaderComponent,
+		// BigLoaderComponent,
 	],
 	imports: [
 		BrowserModule,
 		AppRoutingModule,
 		BrowserAnimationsModule,
+		HttpClientModule,
 		AuthModule,
 		HomeModule,
 		NavModule,
@@ -41,7 +43,8 @@ import { FindModule } from './shared/modals/find/find.module';
 			provide: HTTP_INTERCEPTORS,
 			useClass: TokenInterceptorService,
 			multi: true
-		}],
+		},
+		HttpClient],
 	bootstrap: [AppComponent],
 	// entryComponents: [
 	// 	AddMemoComponent,

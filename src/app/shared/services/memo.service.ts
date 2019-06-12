@@ -24,7 +24,23 @@ export class MemoService {
 		this.modeSubject = new BehaviorSubject<string>(this.mode);
 	}
 
-	public async getMemos(): Promise<void> {
+	public async init(): Promise<void> {
+		return new Promise((resolve, reject) => {
+			setTimeout(async () => {
+				let memos = await this.getMemos();
+				this.memos = this.filterMemos(memos);
+				//TODO: error
+
+				this.memoSubject = new BehaviorSubject<{ currentMemo: Memo, count: number }>
+					({ currentMemo: this.memos.pop(), count: this.memos.length });
+
+				//return count;
+				resolve();
+			}, 1000);
+		});
+	}
+
+	public async getMemos(): Promise<Memo[]> {
 		return new Promise((resolve, reject) => {
 			setTimeout(async () => {
 				let response = await this.http.get<ApiResponse>(`${this.baseUrl}/GetMemos`).toPromise();
@@ -36,13 +52,7 @@ export class MemoService {
 				}
 
 				let memos = <Memo[]>response.body;
-				this.memos = this.filterMemos(memos);
-
-				this.memoSubject = new BehaviorSubject<{ currentMemo: Memo, count: number }>
-					({ currentMemo: this.memos.pop(), count: this.memos.length });
-
-				//return count;
-				resolve();
+				resolve(memos);
 			}, 1000);
 		});
 	}
