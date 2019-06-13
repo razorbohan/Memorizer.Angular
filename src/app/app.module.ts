@@ -57,8 +57,8 @@ import { FindModule } from './shared/modals/find/find.module';
 })
 export class AppModule { }
 
-//TODO: Find modal
 //TODO: angular materials (mat-toolbar-row)
 //TODO: 3d-party login?
 //TODO: tests
 //TODO: deploy
+//TODO: Find modal fix validation

@@ -1,16 +1,16 @@
-.modal-body{
+.modal-body {
   min-height: 250px;
-}
 
-table {
-  width: 100%;
-}
+  .mat-form-field.findInput {
+    font-size: 14px;
+    width: 100%;
+  }
 
-.mat-form-field.findInput {
-  font-size: 14px;
-  width: 100%;
-}
+  table {
+    width: 100%;
 
-th.mat-sort-header-sorted {
-  color: black;
+    td {
+      padding-right: 5px;
+    }
+  }
 }

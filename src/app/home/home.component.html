@@ -15,7 +15,7 @@
 		<span>Overall: {{count}}</span>
 	</div>
 	<div class="col-3 d-flex justify-content-center">
-		<button (click)="showAnswer()" class="btn btn-primary p-3" type="button">Show</button>
+		<button class="btn btn-outline-primary" (click)="showAnswer()">Show</button>
 	</div>
 	<div class="col-3 d-flex justify-content-center update-group">
 		<div class="btn-group" *ngIf="isShowUpdateGroup || isFocused" (mouseenter)="isFocused=true"

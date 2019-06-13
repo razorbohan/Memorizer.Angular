@@ -2,13 +2,15 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSort, MatTableDataSource, MatPaginator, MatTable } from '@angular/material';
 import { DateAdapter, MAT_DATE_FORMATS } from '@angular/material/core';
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
+import { AbstractControl } from '@angular/forms';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 
-// import * as moment from 'moment';
+import * as moment from 'moment';
 import { MemoService } from '../../services/memo.service';
 import { Memo } from '../../models/memo';
 import { FormControl, FormGroup, Validators, FormArray } from '@angular/forms';
 import { Message } from '../../models/message';
+import { PostponeLevels } from '../../models/memo';
 
 export const MY_FORMATS = {
 	parse: {
@@ -36,6 +38,7 @@ export class FindMemoComponent implements OnInit {
 	isLoading: boolean;
 
 	controls: FormArray;
+	levels: number[];
 
 	dataSource: MatTableDataSource<Memo>;
 	displayedColumns: string[] = ['id', 'question', 'answer', 'repeatDate', 'postponeLevel', 'scores'];
@@ -46,7 +49,9 @@ export class FindMemoComponent implements OnInit {
 	constructor(
 		private memoService: MemoService,
 		private modalRef: BsModalRef
-	) { }
+	) {
+		this.levels = PostponeLevels;
+	}
 
 	async ngOnInit() {
 		await this.getMemos();
@@ -77,11 +82,10 @@ export class FindMemoComponent implements OnInit {
 	private generateFormControls(memos: Memo[]) {
 		const toGroups = memos.map(entity => {
 			return new FormGroup({
-				id: new FormControl(entity.id, Validators.required),
 				question: new FormControl(entity.question, Validators.required),
 				answer: new FormControl(entity.answer, Validators.required),
-				repeatDate: new FormControl(entity.repeatDate, Validators.required),
-				postponeLevel: new FormControl(entity.postponeLevel, Validators.required),
+				repeatDate: new FormControl(entity.repeatDate, Validators.compose([Validators.required, CustomValidators.dateVaidator])),
+				postponeLevel: new FormControl(entity.postponeLevel, CustomValidators.dateVaidator),
 				scores: new FormControl(entity.scores, Validators.required)
 			}/*, { updateOn: "blur" }*/);
 		});
@@ -90,11 +94,15 @@ export class FindMemoComponent implements OnInit {
 
 	public async updateField(index: number, memo: Memo, field: string) {
 		const control = this.getControl(index, field);
+		console.log(control);
+		
+		if (memo[field] == control.value)
+			return;
 		if (control.valid) {
 			try {
 				this.isLoading = true;
 
-				console.log(control.value);		
+				console.log(control.value);
 				memo[field] = control.value; //TODO: do not work			
 				this.message = await this.memoService.updateMemo(memo);
 			} catch (error) {
@@ -111,5 +119,14 @@ export class FindMemoComponent implements OnInit {
 
 	public hide() {
 		this.modalRef.hide();
+	}
+}
+
+class CustomValidators {
+	static dateVaidator(AC: AbstractControl) {
+		if (AC && AC.value && !moment(AC.value, 'dd.MM.yyyy', true).isValid()) {
+			return { 'dateVaidator': true };
+		}
+		return null;
 	}
 }

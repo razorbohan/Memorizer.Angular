@@ -4,8 +4,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatMomentDateModule } from '@angular/material-moment-adapter'
 import {
-  MatInputModule, MatPaginatorModule, MatProgressSpinnerModule,
-  MatSortModule, MatTableModule, MatDatepickerModule,
+  MatInputModule, 
+  MatPaginatorModule, 
+  MatProgressSpinnerModule,
+  MatSortModule, 
+  MatTableModule, 
+  MatDatepickerModule,
+  MatSelectModule,
+  MatButtonModule
 } from "@angular/material";
 
 import { FindMemoComponent } from './find.component';
@@ -39,6 +45,8 @@ import { SharedModule } from '../../shared.module';
     MatProgressSpinnerModule,
     MatDatepickerModule,
     MatMomentDateModule,
+    MatSelectModule,
+    MatButtonModule,
     SharedModule
   ],
   exports: [

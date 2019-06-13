@@ -8,6 +8,13 @@ import { FindModule } from '../shared/modals/find/find.module';
 import { NavComponent } from './nav.component';
 import { LoginNavComponent } from './login-nav/login-nav.component';
 import { SharedModule } from '../shared/shared.module';
+import {
+  NavbarModule,
+  WavesModule,
+  ButtonsModule,
+  MDBBootstrapModule
+} from 'angular-bootstrap-md'
+
 
 @NgModule({
   declarations: [
@@ -18,6 +25,10 @@ import { SharedModule } from '../shared/shared.module';
     CommonModule,
     RouterModule,
     FindModule,
+    NavbarModule,
+    WavesModule,
+    ButtonsModule,
+    MDBBootstrapModule.forRoot(),
     SharedModule
   ],
   exports: [
