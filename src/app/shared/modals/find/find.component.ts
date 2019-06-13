@@ -4,10 +4,11 @@ import { DateAdapter, MAT_DATE_FORMATS } from '@angular/material/core';
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 
-import * as moment from 'moment';
+// import * as moment from 'moment';
 import { MemoService } from '../../services/memo.service';
 import { Memo } from '../../models/memo';
 import { FormControl, FormGroup, Validators, FormArray } from '@angular/forms';
+import { Message } from '../../models/message';
 
 export const MY_FORMATS = {
 	parse: {
@@ -31,7 +32,7 @@ export const MY_FORMATS = {
 	],
 })
 export class FindMemoComponent implements OnInit {
-	message: string;
+	message: Message;
 	isLoading: boolean;
 
 	controls: FormArray;
@@ -82,27 +83,25 @@ export class FindMemoComponent implements OnInit {
 				repeatDate: new FormControl(entity.repeatDate, Validators.required),
 				postponeLevel: new FormControl(entity.postponeLevel, Validators.required),
 				scores: new FormControl(entity.scores, Validators.required)
-			}, { updateOn: "blur" });
+			}/*, { updateOn: "blur" }*/);
 		});
 		this.controls = new FormArray(toGroups);
 	}
 
-	public updateField(index: number, memo: Memo, field: string) {
+	public async updateField(index: number, memo: Memo, field: string) {
 		const control = this.getControl(index, field);
 		if (control.valid) {
 			try {
 				this.isLoading = true;
-				memo = control.value
-				let tt = memo;
-				console.log(tt);				
-				
-				//this.message = await this.memoService.updateMemo(this.currentMemo);
+
+				console.log(control.value);		
+				memo[field] = control.value; //TODO: do not work			
+				this.message = await this.memoService.updateMemo(memo);
 			} catch (error) {
-				//this.message = new Message(error.message, 'danger');
+				this.message = new Message(error.message, 'danger');
 			} finally {
 				this.isLoading = false;
 			}
-			//this.core.update(index, field, control.value);
 		}
 	}
 

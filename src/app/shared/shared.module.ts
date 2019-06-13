@@ -25,7 +25,7 @@ import { ClickOutsideDirective } from './directives/click-outside.directive';
         LoaderComponent,
         MessageComponent,
         SwitcherComponent,
-        ClickOutsideDirective,
+        ClickOutsideDirective
     ],
     exports: [
         AddMemoComponent,

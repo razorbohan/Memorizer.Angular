@@ -15,6 +15,7 @@ import { EditableComponent } from './editable/editable.component';
 import { ViewModeDirective } from './editable/view-mode.directive';
 import { EditModeDirective } from './editable/edit-mode.directive';
 import { EditableOnEnterDirective } from './editable/edit-on-enter.directive';
+import { SharedModule } from '../../shared.module';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { EditableOnEnterDirective } from './editable/edit-on-enter.directive';
     MatSortModule,
     MatProgressSpinnerModule,
     MatDatepickerModule,
-    MatMomentDateModule
+    MatMomentDateModule,
+    SharedModule
   ],
   exports: [
     MatTableModule
