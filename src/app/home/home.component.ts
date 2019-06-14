@@ -7,7 +7,8 @@ import { Message } from '../shared/models/message';
 import { FinishComponent } from '../shared/modals/finish/finish.component';
 import { ConfirmComponent } from '../shared/modals/confirm/confirm.component';
 import { fadeAnimation } from '../shared/animations/fade.animation';
-import { MatTableDataSource, MatSort } from '@angular/material';
+import { MatTableDataSource, MatSort, MatPaginator } from '@angular/material';
+import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 
 interface PeriodicElement {
 	name: string;
@@ -36,10 +37,11 @@ const ELEMENT_DATA: PeriodicElement[] = [
 	animations: [fadeAnimation]
 })
 export class HomeComponent implements OnInit {
-	dataSource: MatTableDataSource<PeriodicElement>;
-
-	displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
+	dataSource: MatTableDataSource<Memo>;
+	displayedColumns: string[] = ['id', 'question', 'answer', 'repeatDate', 'postponeLevel', 'scores'];
+	//displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
 	@ViewChild(MatSort) sort: MatSort;
+	@ViewChild(MatPaginator) paginator: MatPaginator;
 
 	currentMemo: Memo = new Memo();
 	count: number;
@@ -51,13 +53,17 @@ export class HomeComponent implements OnInit {
 	isFocused: boolean;
 
 	message: Message;
+	controls: FormArray;
 
 	constructor(private memoService: MemoService,
 		private modalService: BsModalService) { }
 
-	ngOnInit() {
-		this.dataSource = new MatTableDataSource(ELEMENT_DATA);
+	async ngOnInit() {
+		let memos = await this.memoService.getMemos();
+		this.generateFormControls(memos);
+		this.dataSource = new MatTableDataSource<Memo>(memos);
 		this.dataSource.sort = this.sort;
+		this.dataSource.paginator = this.paginator;
 		this.memoService.modeSubject.subscribe(
 			(mode) => {
 				this.mode = mode;
@@ -65,6 +71,19 @@ export class HomeComponent implements OnInit {
 				this.subscribeToMemos();
 			}
 		);
+	}
+
+	private generateFormControls(memos: Memo[]) {
+		const toGroups = memos.map(entity => {
+			return new FormGroup({
+				question: new FormControl(entity.question, Validators.required),
+				answer: new FormControl(entity.answer, Validators.required),
+				repeatDate: new FormControl(entity.repeatDate),
+				postponeLevel: new FormControl(entity.postponeLevel),
+				scores: new FormControl(entity.scores, Validators.required)
+			}/*, { updateOn: "blur" }*/);
+		});
+		this.controls = new FormArray(toGroups);
 	}
 
 	private clearView() {

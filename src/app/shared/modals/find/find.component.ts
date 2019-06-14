@@ -84,7 +84,7 @@ export class FindMemoComponent implements OnInit {
 				question: new FormControl(entity.question, Validators.required),
 				answer: new FormControl(entity.answer, Validators.required),
 				repeatDate: new FormControl(entity.repeatDate, Validators.compose([Validators.required, CustomValidators.dateVaidator])),
-				postponeLevel: new FormControl(entity.postponeLevel, CustomValidators.dateVaidator),
+				postponeLevel: new FormControl(entity.postponeLevel),
 				scores: new FormControl(entity.scores, Validators.required)
 			}/*, { updateOn: "blur" }*/);
 		});

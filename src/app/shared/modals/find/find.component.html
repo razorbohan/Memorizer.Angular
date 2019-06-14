@@ -7,9 +7,9 @@
 <div class="modal-body">
 	<alert-message [message]="message"></alert-message>
 
-	<memo-big-loader *ngIf="isLoading"></memo-big-loader>
+	<!-- <memo-big-loader *ngIf="isLoading"></memo-big-loader> -->
 
-	<div *ngIf="!isLoading">
+	<!-- <div *ngIf="!isLoading"> -->
 		<mat-form-field class="findInput">
 			<input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter...">
 		</mat-form-field>
@@ -129,7 +129,7 @@
 			<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
 			<tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 		</table>
-	</div>
+	<!-- </div> -->
 
 	<mat-paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons
 		[ngStyle]="{'visibility':isLoading ? 'hidden' : 'visible'}">

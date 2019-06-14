@@ -58,7 +58,9 @@ import { MaterialModule } from './material.module';
 })
 export class AppModule { }
 
-//TODO: angular materials (mat-toolbar-row)
+//TODO: choose another theme
+
+//TODO: angular materials (MatSnackBar, MatDialog, mat-progress-spinner/mat-spinner, mat-divider, mat-slide-toggle, badge, mat-horizontal-stepper)
 //TODO: finish login page
 //TODO: 3d-party login?
 //TODO: tests

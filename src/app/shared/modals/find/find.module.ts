@@ -29,10 +29,10 @@ import {
     FindMemoComponent,
     BigLoaderComponent,
 
-    EditableComponent,
-    ViewModeDirective,
-    EditModeDirective,
-    EditableOnEnterDirective
+    // EditableComponent,
+    // ViewModeDirective,
+    // EditModeDirective,
+    // EditableOnEnterDirective
   ],
   imports: [
     BrowserModule,
