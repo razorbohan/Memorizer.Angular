@@ -2,13 +2,14 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
-import { HttpClientModule } from '@angular/common/http'; 
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthModule } from './auth/auth.module';
 import { HomeModule } from './home/home.module';
 import { NavModule } from './nav/nav.module';
+import { FindModule } from './shared/modals/find/find.module';
 
 import { MemoService } from './shared/services/memo.service';
 import { AuthService } from './shared/services/auth.service';
@@ -16,8 +17,9 @@ import { TokenInterceptorService } from './shared/services/token-interceptor.ser
 import { HomeGuard } from './shared/services/home.guard';
 import { AuthGuard } from './shared/services/auth.guard';
 
+import { MaterialModule } from './material.module';
+
 // import { BigLoaderComponent } from './shared/components/big-loader/big-loader.component';
-import { FindModule } from './shared/modals/find/find.module';
 
 @NgModule({
 	declarations: [
@@ -32,7 +34,8 @@ import { FindModule } from './shared/modals/find/find.module';
 		AuthModule,
 		HomeModule,
 		NavModule,
-		FindModule
+		FindModule,
+		//MaterialModule
 	],
 	providers: [
 		MemoService,
@@ -51,13 +54,12 @@ import { FindModule } from './shared/modals/find/find.module';
 	// 	FindMemoComponent,
 	// 	FinishComponent,
 	// 	ConfirmComponent,
-	// 	SmartTableDatepickerRenderComponent,
-	// 	SmartTableDatepickerComponent
 	// ]
 })
 export class AppModule { }
 
 //TODO: angular materials (mat-toolbar-row)
+//TODO: finish login page
 //TODO: 3d-party login?
 //TODO: tests
 //TODO: deploy

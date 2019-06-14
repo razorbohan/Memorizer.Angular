@@ -6,23 +6,26 @@
       <hr />
 
       <alert-message [message]="errorMessage"></alert-message>
-
-      <div class="form-group">
-        <label for="emial">Email</label>
-        <input type="text" id="email" class="form-control" formControlName="email" placeholder="Input your email" />
-        <div *ngIf="loginForm.get('email').invalid && loginForm.get('email').touched" class="invalid">
-          <span *ngIf="loginForm.get('email')['errors']['required']">Input your email</span>
-          <span *ngIf="loginForm.get('email')['errors']['email']">Wrong email address</span>
-        </div>
+      <div>
+        <mat-form-field appearance="outline">
+          <mat-label>Input your email</mat-label>
+          <input matInput formControlName="email" placeholder="Email" />
+          <mat-error *ngIf="loginForm.get('email').invalid && loginForm.get('email')['errors']['required']">Email must not be empty</mat-error>
+          <mat-error *ngIf="loginForm.get('email').invalid && loginForm.get('email')['errors']['email']">Wrong email address</mat-error>
+        </mat-form-field>
       </div>
-      <div class="form-group">
-        <label for="password">Password</label>
-        <input type="password" id="password" class="form-control" formControlName="password"
-          placeholder="Input your password" />
-        <div *ngIf="loginForm.get('password').invalid && loginForm.get('password').touched" class="invalid">
-          <span *ngIf="loginForm.get('password')['errors']['required']">Input your password</span>
+
+      <div>
+        <mat-form-field appearance="outline">
+          <mat-label>Input your password</mat-label>
+          <input matInput type="password" formControlName="password" placeholder="Password" />
+          <mat-error *ngIf="loginForm.get('password').invalid && loginForm.get('password')['errors']['required']">Password must not be empty</mat-error>
+          <mat-error *ngIf="loginForm.get('password').invalid && loginForm.get('password')['errors']['minlength']">Your password is too short</mat-error>
+        </mat-form-field>
+        <!-- <div *ngIf="loginForm.get('password').invalid && loginForm.get('password').touched" class="invalid">
+          <span *ngIf="loginForm.get('password')['errors']['required']">Password can't be empty</span>
           <span *ngIf="loginForm.get('password')['errors']['minlength']">Your password is too short</span>
-        </div>
+        </div> -->
       </div>
       <div class="form-group">
         <memo-switcher></memo-switcher>

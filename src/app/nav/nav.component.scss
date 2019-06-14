@@ -12,6 +12,11 @@
   padding-right: 0 !important;
 }
 
-::ng-deep a.nav-link,a.navbar-brand {
+::ng-deep a.nav-link,
+a.navbar-brand {
   cursor: pointer;
+}
+
+::ng-deep nav {
+  margin-bottom: 20px;
 }

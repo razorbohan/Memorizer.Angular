@@ -102,8 +102,7 @@ export class FindMemoComponent implements OnInit {
 			try {
 				this.isLoading = true;
 
-				console.log(control.value);
-				memo[field] = control.value; //TODO: do not work			
+				memo[field] = control.value;		
 				this.message = await this.memoService.updateMemo(memo);
 			} catch (error) {
 				this.message = new Message(error.message, 'danger');
