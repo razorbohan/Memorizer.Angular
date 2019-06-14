@@ -4,6 +4,16 @@ import { SharedModule } from '../shared/shared.module';
 import { HomeComponent } from './home.component';
 import { FormsModule } from '@angular/forms';
 import { MaterialModule } from '../material.module';
+import {
+  MatInputModule,
+  MatPaginatorModule,
+  MatProgressSpinnerModule,
+  MatSortModule,
+  MatTableModule,
+  MatDatepickerModule,
+  MatSelectModule,
+  MatButtonModule,
+} from "@angular/material";
 
 @NgModule({
   declarations: [
@@ -13,7 +23,15 @@ import { MaterialModule } from '../material.module';
     CommonModule,
     SharedModule,
     FormsModule,
-    MaterialModule
+    MaterialModule,
+    MatInputModule,
+    MatPaginatorModule,
+    MatProgressSpinnerModule,
+    MatSortModule,
+    MatTableModule,
+    MatDatepickerModule,
+    MatSelectModule,
+    MatButtonModule,
   ]
 })
 export class HomeModule { }

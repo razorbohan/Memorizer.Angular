@@ -19,10 +19,12 @@ textarea {
   margin: 0.25em auto;
 }
 
-.update-group:hover {
-  visibility: visible;
-}
+.update-group {
+  button {
+    margin: auto 0;
+  }
 
-.btn-outline-danger {
-  margin: 0 !important;
+  &:hover {
+    visibility: visible;
+  }
 }

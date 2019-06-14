@@ -18,18 +18,19 @@
 		<button class="btn btn-outline-primary" (click)="showAnswer()">Show</button>
 	</div>
 	<div class="col-3 d-flex justify-content-center update-group">
-		<div class="btn-group" *ngIf="isShowUpdateGroup || isFocused" (mouseenter)="isFocused=true"
-			(mouseleave)="isFocused=false">
-			<button class="btn btn-outline-secondary" (click)="replaceMemos()" type="button">
+		<div class="btn-group" (mouseenter)="isFocused=true" (mouseleave)="isFocused=false">
+			<button class="btn btn-outline-secondary" *ngIf="isShowUpdateGroup || isFocused" (click)="replaceMemos()"
+				type="button">
 				<i class="fa fa-exchange"></i>
 			</button>
-			<button class="btn btn-outline-primary" (click)="updateMemo()" type="button">
+			<button class="btn btn-outline-primary" *ngIf="isShowUpdateGroup || isFocused" (click)="updateMemo()"
+				type="button">
 				<i class="far fa-save"></i>
 			</button>
+			<button class="btn btn-outline-danger" (click)="deleteMemo()" type="button">
+				<i class="fas fa-trash-alt"></i>
+			</button>
 		</div>
-		<button class="btn btn-outline-danger" type="button" (click)="deleteMemo()">
-			<i class="fas fa-trash-alt"></i>
-		</button>
 	</div>
 </div>
 
@@ -41,12 +42,43 @@
 		<div class="mx-auto my-2">
 			<div class="answer-group btn-group">
 				<button *ngIf="mode == 'Repeat'" class="btn btn-danger" (click)="submitAnswer('Bad')">Bad</button>
-				<button *ngIf="mode == 'Repeat'" class="btn btn-warning" (click)="submitAnswer('Tomorrow')">Tomorrow</button>
+				<button *ngIf="mode == 'Repeat'" class="btn btn-warning"
+					(click)="submitAnswer('Tomorrow')">Tomorrow</button>
 				<button class="btn btn-primary" (click)="submitAnswer('Later')">Later</button>
 				<button class="btn btn-success" (click)="submitAnswer('Cool')">Cool</button>
 			</div>
 		</div>
 	</div>
 </div>
+
+<table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+
+	<!-- Position Column -->
+	<ng-container matColumnDef="position">
+		<th mat-header-cell *matHeaderCellDef mat-sort-header> No. </th>
+		<td mat-cell *matCellDef="let element"> {{element.position}} </td>
+	</ng-container>
+
+	<!-- Name Column -->
+	<ng-container matColumnDef="name">
+		<th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+		<td mat-cell *matCellDef="let element"> {{element.name}} </td>
+	</ng-container>
+
+	<!-- Weight Column -->
+	<ng-container matColumnDef="weight">
+		<th mat-header-cell *matHeaderCellDef mat-sort-header> Weight </th>
+		<td mat-cell *matCellDef="let element"> {{element.weight}} </td>
+	</ng-container>
+
+	<!-- Symbol Column -->
+	<ng-container matColumnDef="symbol">
+		<th mat-header-cell *matHeaderCellDef mat-sort-header> Symbol </th>
+		<td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
+	</ng-container>
+
+	<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+	<tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
 
 <memo-loader [isLoading]="isLoading"></memo-loader>

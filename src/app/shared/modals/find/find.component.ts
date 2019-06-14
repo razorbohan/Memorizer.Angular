@@ -7,10 +7,9 @@ import { BsModalRef } from 'ngx-bootstrap/modal';
 
 import * as moment from 'moment';
 import { MemoService } from '../../services/memo.service';
-import { Memo } from '../../models/memo';
 import { FormControl, FormGroup, Validators, FormArray } from '@angular/forms';
 import { Message } from '../../models/message';
-import { PostponeLevels } from '../../models/memo';
+import { Memo, PostponeLevels } from '../../models/memo';
 
 export const MY_FORMATS = {
 	parse: {

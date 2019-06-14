@@ -21,7 +21,7 @@ import {
   MatTableModule,
   MatDatepickerModule,
   MatSelectModule,
-  MatButtonModule
+  MatButtonModule,
 } from "@angular/material";
 
 @NgModule({
@@ -49,7 +49,7 @@ import {
     MatMomentDateModule,
     MatSelectModule,
     MatButtonModule,
-    //MaterialModule,
+    MaterialModule,
     SharedModule
   ],
   exports: [
