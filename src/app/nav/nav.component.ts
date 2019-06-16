@@ -5,6 +5,7 @@ import { AddMemoComponent } from '../shared/modals/add/add.component';
 import { FindMemoComponent } from '../shared/modals/find/find.component';
 import { MemoService } from '../shared/services/memo.service';
 import { fadeAnimation } from '../shared/animations/fade.animation';
+import { AuthService } from '../shared/services/auth.service';
 
 @Component({
 	selector: 'memo-nav',
@@ -20,8 +21,13 @@ export class NavComponent {
 
 	constructor(
 		private modalService: BsModalService,
-		private memoService: MemoService
+		private memoService: MemoService,
+		private authService: AuthService
 	) { }
+
+	isLoggedIn(): boolean {
+		return this.authService.isLoggedIn;
+	}
 
 	openAddModal() {
 		this.addModalRef = this.modalService.show(AddMemoComponent, { class: 'modal-lg' });

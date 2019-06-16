@@ -7,28 +7,6 @@ import { Message } from '../shared/models/message';
 import { FinishComponent } from '../shared/modals/finish/finish.component';
 import { ConfirmComponent } from '../shared/modals/confirm/confirm.component';
 import { fadeAnimation } from '../shared/animations/fade.animation';
-import { MatTableDataSource, MatSort, MatPaginator } from '@angular/material';
-import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
-
-interface PeriodicElement {
-	name: string;
-	position: number;
-	weight: number;
-	symbol: string;
-}
-
-const ELEMENT_DATA: PeriodicElement[] = [
-	{ position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H' },
-	{ position: 2, name: 'Helium', weight: 4.0026, symbol: 'He' },
-	{ position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li' },
-	{ position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be' },
-	{ position: 5, name: 'Boron', weight: 10.811, symbol: 'B' },
-	{ position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C' },
-	{ position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N' },
-	{ position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O' },
-	{ position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F' },
-	{ position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne' },
-];
 
 @Component({
 	selector: 'memo-home',
@@ -37,11 +15,6 @@ const ELEMENT_DATA: PeriodicElement[] = [
 	animations: [fadeAnimation]
 })
 export class HomeComponent implements OnInit {
-	dataSource: MatTableDataSource<Memo>;
-	displayedColumns: string[] = ['id', 'question', 'answer', 'repeatDate', 'postponeLevel', 'scores'];
-	//displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-	@ViewChild(MatSort) sort: MatSort;
-	@ViewChild(MatPaginator) paginator: MatPaginator;
 
 	currentMemo: Memo = new Memo();
 	count: number;
@@ -53,17 +26,11 @@ export class HomeComponent implements OnInit {
 	isFocused: boolean;
 
 	message: Message;
-	controls: FormArray;
 
 	constructor(private memoService: MemoService,
 		private modalService: BsModalService) { }
 
 	async ngOnInit() {
-		let memos = await this.memoService.getMemos();
-		this.generateFormControls(memos);
-		this.dataSource = new MatTableDataSource<Memo>(memos);
-		this.dataSource.sort = this.sort;
-		this.dataSource.paginator = this.paginator;
 		this.memoService.modeSubject.subscribe(
 			(mode) => {
 				this.mode = mode;
@@ -71,19 +38,6 @@ export class HomeComponent implements OnInit {
 				this.subscribeToMemos();
 			}
 		);
-	}
-
-	private generateFormControls(memos: Memo[]) {
-		const toGroups = memos.map(entity => {
-			return new FormGroup({
-				question: new FormControl(entity.question, Validators.required),
-				answer: new FormControl(entity.answer, Validators.required),
-				repeatDate: new FormControl(entity.repeatDate),
-				postponeLevel: new FormControl(entity.postponeLevel),
-				scores: new FormControl(entity.scores, Validators.required)
-			}/*, { updateOn: "blur" }*/);
-		});
-		this.controls = new FormArray(toGroups);
 	}
 
 	private clearView() {

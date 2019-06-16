@@ -12,11 +12,6 @@ import { MessageComponent } from './components/message/message.component';
 import { SwitcherComponent } from './components/switcher/switcher.component';
 import { ClickOutsideDirective } from './directives/click-outside.directive';
 
-import { EditableComponent } from './modals/find/editable/editable.component';
-import { ViewModeDirective } from './modals/find/editable/view-mode.directive';
-import { EditModeDirective } from './modals/find/editable/edit-mode.directive';
-import { EditableOnEnterDirective } from './modals/find/editable/edit-on-enter.directive';
-
 @NgModule({
     imports: [
         CommonModule,
@@ -30,12 +25,7 @@ import { EditableOnEnterDirective } from './modals/find/editable/edit-on-enter.d
         LoaderComponent,
         MessageComponent,
         SwitcherComponent,
-        ClickOutsideDirective,
-
-        EditableComponent,
-		ViewModeDirective,
-		EditModeDirective,
-		EditableOnEnterDirective
+        ClickOutsideDirective
     ],
     exports: [
         AddMemoComponent,
@@ -44,12 +34,7 @@ import { EditableOnEnterDirective } from './modals/find/editable/edit-on-enter.d
         LoaderComponent,
         MessageComponent,
         SwitcherComponent,
-        ClickOutsideDirective,
-
-        EditableComponent,
-		ViewModeDirective,
-		EditModeDirective,
-		EditableOnEnterDirective
+        ClickOutsideDirective
     ],
     entryComponents: [
 		AddMemoComponent,

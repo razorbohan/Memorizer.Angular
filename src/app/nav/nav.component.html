@@ -7,8 +7,7 @@
 	</mdb-navbar-brand>
 
 	<links>
-		<!-- Links -->
-		<ul class="navbar-nav mr-auto">
+		<ul *ngIf="isLoggedIn()" class="navbar-nav mr-auto">
 			<li class="nav-item">
 				<a class="nav-link waves-light" mdbWavesEffect (click)="switchMode()">{{showMode()}}</a>
 			</li>
@@ -23,4 +22,3 @@
 		<memo-login-nav></memo-login-nav>
 	</links>
 </mdb-navbar>
-
