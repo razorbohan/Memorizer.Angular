@@ -14,16 +14,16 @@ export class ConfirmComponent implements OnInit {
   constructor(public modalRef: BsModalRef) { }
 
   ngOnInit() {
-    this.onClose = new Subject();
+	this.onClose = new Subject();
   }
 
   public confirm(): void {
-    this.onClose.next(true);
-    this.modalRef.hide();
+	this.onClose.next(true);
+	this.modalRef.hide();
   }
 
   public cancel(): void {
-    this.onClose.next(false);
-    this.modalRef.hide();
+	this.onClose.next(false);
+	this.modalRef.hide();
   }
 }

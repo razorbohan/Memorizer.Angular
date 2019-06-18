@@ -20,7 +20,7 @@ export class MessageComponent implements OnChanges {
     setTimeout(() => this.canBeClosed = true, 1000);
   }
 
-  private hideMessage() {
+  public hideMessage() {
     if (this.canBeClosed) {
       this.message = null;
       this.canBeClosed = false;

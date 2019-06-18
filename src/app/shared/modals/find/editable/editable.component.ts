@@ -1,4 +1,4 @@
-import { Component, ContentChild, HostListener, ElementRef, EventEmitter, Output, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { Component, ContentChild, HostListener, ElementRef, EventEmitter, Output, ChangeDetectionStrategy, ChangeDetectorRef, OnInit } from '@angular/core';
 import { ViewModeDirective } from './view-mode.directive';
 import { EditModeDirective } from './edit-mode.directive';
 import { NgControl } from '@angular/forms';
@@ -13,7 +13,7 @@ import { untilDestroyed } from 'ngx-take-until-destroy';
   `,
   styleUrls: ['./editable.component.css']
 })
-export class EditableComponent {
+export class EditableComponent implements OnInit {
   @ContentChild(ViewModeDirective) viewModeTpl: ViewModeDirective;
   @ContentChild(EditModeDirective) editModeTpl: EditModeDirective;
   @Output() update = new EventEmitter();
@@ -52,7 +52,7 @@ export class EditableComponent {
     const clickOutside$ = fromEvent(document, 'click').pipe(
       filter(({ target }) => this.element.contains(target) === false),
       take(1)
-    )
+    );
 
     this.editMode$.pipe(
       switchMapTo(clickOutside$),
@@ -63,7 +63,4 @@ export class EditableComponent {
   get currentView() {
     return this.mode === 'view' ? this.viewModeTpl.tpl : this.editModeTpl.tpl;
   }
-
-  ngOnDestroy() { }
-
 }

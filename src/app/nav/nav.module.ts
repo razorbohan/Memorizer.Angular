@@ -13,28 +13,28 @@ import {
   WavesModule,
   ButtonsModule,
   MDBBootstrapModule
-} from 'angular-bootstrap-md'
+} from 'angular-bootstrap-md';
 
 
 @NgModule({
   declarations: [
-    NavComponent,
-    LoginNavComponent
+	NavComponent,
+	LoginNavComponent
   ],
   imports: [
-    CommonModule,
-    RouterModule,
-    FindModule,
-    NavbarModule,
-    WavesModule,
-    ButtonsModule,
-    MDBBootstrapModule.forRoot(),
-    SharedModule
+	CommonModule,
+	RouterModule,
+	FindModule,
+	NavbarModule,
+	WavesModule,
+	ButtonsModule,
+	MDBBootstrapModule.forRoot(),
+	SharedModule
   ],
   exports: [
-    FindModule,
-    LoginNavComponent,
-    NavComponent
+	FindModule,
+	LoginNavComponent,
+	NavComponent
   ],
   providers: [BsModalService]
 })

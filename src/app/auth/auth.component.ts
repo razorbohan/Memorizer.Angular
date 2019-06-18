@@ -14,6 +14,6 @@ export class AuthComponent implements OnInit {
   ngOnInit() { }
 
   handleRouteAnimation(outlet) {
-    return outlet && outlet.activatedRouteData && outlet.activatedRouteData['animation'];
+	return outlet && outlet.activatedRouteData && outlet.activatedRouteData.animation;
   }
 }

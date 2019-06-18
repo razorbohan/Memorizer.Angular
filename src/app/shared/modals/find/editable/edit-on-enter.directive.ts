@@ -10,7 +10,7 @@ export class EditableOnEnterDirective {
 
   @HostListener('keyup.enter')
   onEnter() {
-    this.editable.toViewMode();
+	this.editable.toViewMode();
   }
 
 }

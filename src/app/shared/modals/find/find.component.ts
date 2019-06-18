@@ -23,6 +23,15 @@ export const MY_FORMATS = {
 	},
 };
 
+class CustomValidators {
+	static dateVaidator(AC: AbstractControl) {
+		if (AC && AC.value && !moment(AC.value, 'dd.MM.yyyy', true).isValid()) {
+			return { dateVaidator: true };
+		}
+		return null;
+	}
+}
+
 @Component({
 	selector: 'memo-find',
 	templateUrl: './find.component.html',
@@ -66,14 +75,13 @@ export class FindMemoComponent implements OnInit {
 		try {
 			this.isLoading = true;
 
-			let memos = await this.memoService.getMemos();
+			const memos = await this.memoService.getMemos();
 			this.generateFormControls(memos);
 			this.dataSource = new MatTableDataSource<Memo>(memos);
 		} catch (error) {
 			console.error(error.statusText);
 			this.message = error.statusText;
-		}
-		finally {
+		} finally {
 			this.isLoading = false;
 		}
 	}
@@ -94,14 +102,15 @@ export class FindMemoComponent implements OnInit {
 	public async updateField(index: number, memo: Memo, field: string) {
 		const control = this.getControl(index, field);
 		console.log(control);
-		
-		if (memo[field] == control.value)
+
+		if (memo[field] == control.value) {
 			return;
+		}
 		if (control.valid) {
 			try {
 				this.isLoading = true;
 
-				memo[field] = control.value;		
+				memo[field] = control.value;
 				this.message = await this.memoService.updateMemo(memo);
 			} catch (error) {
 				this.message = new Message(error.message, 'danger');
@@ -117,14 +126,5 @@ export class FindMemoComponent implements OnInit {
 
 	public hide() {
 		this.modalRef.hide();
-	}
-}
-
-class CustomValidators {
-	static dateVaidator(AC: AbstractControl) {
-		if (AC && AC.value && !moment(AC.value, 'dd.MM.yyyy', true).isValid()) {
-			return { 'dateVaidator': true };
-		}
-		return null;
 	}
 }

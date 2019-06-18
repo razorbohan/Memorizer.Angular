@@ -17,48 +17,48 @@ export class RegisterComponent implements OnInit {
   isLoading: boolean;
 
   constructor(private formBuilder: FormBuilder,
-    private authService: AuthService) { }
+				          private authService: AuthService) { }
 
   ngOnInit() {
-    this.registerForm = this.formBuilder.group({
-      email: ['', [Validators.required, Validators.email], this.checkEmail.bind(this)],
-      password: ['', [Validators.required, Validators.minLength(5)]],
-      confirmPassword: ['', Validators.required]
-    }, {
-        validator: this.matchPassword
-      });
+	this.registerForm = this.formBuilder.group({
+		email: ['', [Validators.required, Validators.email], this.checkEmail.bind(this)],
+		password: ['', [Validators.required, Validators.minLength(5)]],
+		confirmPassword: ['', Validators.required]
+	}, {
+		validator: this.matchPassword
+		});
   }
 
   async onSubmit() {
-    try {
-      this.isLoading = true;
-      await this.authService.register(this.registerForm.value);
-    } catch (error) {
-      this.errorMessage = new Message(error.message, 'danger');
-    } finally {
-      this.isLoading = false;
-    }
+	try {
+		this.isLoading = true;
+		await this.authService.register(this.registerForm.value);
+	} catch (error) {
+		this.errorMessage = new Message(error.message, 'danger');
+	} finally {
+		this.isLoading = false;
+	}
   }
 
   private matchPassword(control: AbstractControl) {
-    let password = control.get('password').value;
-    let confirmPassword = control.get('confirmPassword').value;
-    if (password != confirmPassword) {
-      control.get('confirmPassword').setErrors({ MatchPassword: true })
-    } else {
-      return null
-    }
+	const password = control.get('password').value;
+	const confirmPassword = control.get('confirmPassword').value;
+	if (password != confirmPassword) {
+		control.get('confirmPassword').setErrors({ MatchPassword: true });
+	} else {
+		return null;
+	}
   }
-  
+
   private async checkEmail(control: FormControl) {
-    try {
-      this.isCheckingEmail = true;
-      let isUsed = await this.authService.checkEmail(control.value);
-      return isUsed ? { 'isUsed': true } : null;
-    } catch (error) {
-      this.errorMessage = new Message(error.message, 'danger');
-    } finally {
-      this.isCheckingEmail = false;
-    }
+	try {
+		this.isCheckingEmail = true;
+		const isUsed = await this.authService.checkEmail(control.value);
+		return isUsed ? { isUsed: true } : null;
+	} catch (error) {
+		this.errorMessage = new Message(error.message, 'danger');
+	} finally {
+		this.isCheckingEmail = false;
+	}
   }
 }

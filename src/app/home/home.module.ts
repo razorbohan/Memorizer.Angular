@@ -13,26 +13,26 @@ import {
   MatDatepickerModule,
   MatSelectModule,
   MatButtonModule,
-} from "@angular/material";
+} from '@angular/material';
 
 @NgModule({
   declarations: [
-    HomeComponent,
+	HomeComponent,
   ],
   imports: [
-    CommonModule,
-    SharedModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MaterialModule,
-    MatInputModule,
-    MatPaginatorModule,
-    MatProgressSpinnerModule,
-    MatSortModule,
-    MatTableModule,
-    MatDatepickerModule,
-    MatSelectModule,
-    MatButtonModule,
+	CommonModule,
+	SharedModule,
+	FormsModule,
+	ReactiveFormsModule,
+	MaterialModule,
+	MatInputModule,
+	MatPaginatorModule,
+	MatProgressSpinnerModule,
+	MatSortModule,
+	MatTableModule,
+	MatDatepickerModule,
+	MatSelectModule,
+	MatButtonModule,
   ]
 })
 export class HomeModule { }

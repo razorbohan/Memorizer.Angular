@@ -11,16 +11,16 @@ import { MaterialModule } from '../material.module';
 
 @NgModule({
   declarations: [
-    AuthComponent,
-    LoginComponent,
-    RegisterComponent
+	AuthComponent,
+	LoginComponent,
+	RegisterComponent
   ],
   imports: [
-    CommonModule,
-    AuthRoutingModule,
-    SharedModule,
-    ReactiveFormsModule,
-    MaterialModule
+	CommonModule,
+	AuthRoutingModule,
+	SharedModule,
+	ReactiveFormsModule,
+	MaterialModule
   ]
 })
 export class AuthModule { }

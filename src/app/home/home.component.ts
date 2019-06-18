@@ -28,7 +28,7 @@ export class HomeComponent implements OnInit {
 	message: Message;
 
 	constructor(private memoService: MemoService,
-		private modalService: BsModalService) { }
+		           private modalService: BsModalService) { }
 
 	async ngOnInit() {
 		this.memoService.modeSubject.subscribe(
@@ -65,7 +65,7 @@ export class HomeComponent implements OnInit {
 				}
 			);
 		} catch (error) {
-			this.message = new Message(`Error getting memos: ${error.message}`, 'danger')
+			this.message = new Message(`Error getting memos: ${error.message}`, 'danger');
 		} finally {
 			this.isLoading = false;
 		}
@@ -80,8 +80,8 @@ export class HomeComponent implements OnInit {
 	}
 
 	replaceMemos() {
-		let question = this.currentMemo.question;
-		let answer = this.currentMemo.answer;
+		const question = this.currentMemo.question;
+		const answer = this.currentMemo.answer;
 		this.currentMemo.question = answer;
 		this.currentMemo.answer = question;
 	}
@@ -89,9 +89,10 @@ export class HomeComponent implements OnInit {
 	async submitAnswer(answer: string) {
 		try {
 			this.isLoading = true;
-			let message = await this.memoService.submitAnswer(answer);
-			if (message.type == 'danger')
+			const message = await this.memoService.submitAnswer(answer);
+			if (message.type == 'danger') {
 				this.message = message;
+			}
 		} catch (error) {
 			this.message = new Message(error.message, 'danger');
 		} finally {
@@ -112,14 +113,14 @@ export class HomeComponent implements OnInit {
 
 	async deleteMemo() {
 		try {
-			let modalRef = this.modalService.show(ConfirmComponent, { class: 'modal-sm' });
+			const modalRef = this.modalService.show(ConfirmComponent, { class: 'modal-sm' });
 			modalRef.content.onClose.subscribe(async isConfirmed => {
 				if (isConfirmed) {
 					this.isLoading = true;
 					this.message = await this.memoService.deleteMemo(this.currentMemo);
 					this.isLoading = false;
 				}
-			})
+			});
 		} catch (error) {
 			this.message = new Message(error.message, 'danger');
 		}

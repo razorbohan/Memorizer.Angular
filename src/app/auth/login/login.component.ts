@@ -19,23 +19,23 @@ export class LoginComponent implements OnInit {
   private rememberMe: SwitcherComponent;
 
   constructor(private formBuilder: FormBuilder,
-    private authService: AuthService) { }
+				          private authService: AuthService) { }
 
   ngOnInit() {
-    this.loginForm = this.formBuilder.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(5)]]
-    });
+	this.loginForm = this.formBuilder.group({
+		email: ['', [Validators.required, Validators.email]],
+		password: ['', [Validators.required, Validators.minLength(5)]]
+	});
   }
 
   async onSubmit() {
-    try {
-      this.isLoading = true;
-      await this.authService.login({ ...this.loginForm.value, rememberMe: this.rememberMe.isChecked });
-    } catch (error) {
-      this.errorMessage = new Message(error.message, 'danger');
-    } finally {
-      this.isLoading = false;
-    }
+	try {
+		this.isLoading = true;
+		await this.authService.login({ ...this.loginForm.value, rememberMe: this.rememberMe.isChecked });
+	} catch (error) {
+		this.errorMessage = new Message(error.message, 'danger');
+	} finally {
+		this.isLoading = false;
+	}
   }
 }

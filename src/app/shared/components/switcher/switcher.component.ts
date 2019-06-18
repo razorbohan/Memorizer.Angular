@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
 })
 export class SwitcherComponent {
 
-  isChecked: boolean = false;
+  isChecked = false;
 
   constructor() { }
 }

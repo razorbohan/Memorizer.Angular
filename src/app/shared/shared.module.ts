@@ -13,33 +13,33 @@ import { SwitcherComponent } from './components/switcher/switcher.component';
 import { ClickOutsideDirective } from './directives/click-outside.directive';
 
 @NgModule({
-    imports: [
-        CommonModule,
-        ModalModule.forRoot(),
-        FormsModule
-    ],
-    declarations: [
-        AddMemoComponent,
-        ConfirmComponent,
-        FinishComponent,
-        LoaderComponent,
-        MessageComponent,
-        SwitcherComponent,
-        ClickOutsideDirective
-    ],
-    exports: [
-        AddMemoComponent,
-        ConfirmComponent,
-        FinishComponent,
-        LoaderComponent,
-        MessageComponent,
-        SwitcherComponent,
-        ClickOutsideDirective
-    ],
-    entryComponents: [
+	imports: [
+		CommonModule,
+		ModalModule.forRoot(),
+		FormsModule
+	],
+	declarations: [
+		AddMemoComponent,
+		ConfirmComponent,
+		FinishComponent,
+		LoaderComponent,
+		MessageComponent,
+		SwitcherComponent,
+		ClickOutsideDirective
+	],
+	exports: [
+		AddMemoComponent,
+		ConfirmComponent,
+		FinishComponent,
+		LoaderComponent,
+		MessageComponent,
+		SwitcherComponent,
+		ClickOutsideDirective
+	],
+	entryComponents: [
 		AddMemoComponent,
 		FinishComponent,
-        ConfirmComponent,
+		ConfirmComponent,
 	]
 })
 export class SharedModule { }

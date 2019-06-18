@@ -15,24 +15,24 @@ import { MaterialModule } from 'src/app/material.module';
 
 @NgModule({
   declarations: [
-    FindMemoComponent,
-    BigLoaderComponent,
+	FindMemoComponent,
+	BigLoaderComponent,
 
-    EditableComponent,
-    ViewModeDirective,
-    EditModeDirective,
-    EditableOnEnterDirective
+	EditableComponent,
+	ViewModeDirective,
+	EditModeDirective,
+	EditableOnEnterDirective
   ],
   imports: [
-    BrowserModule,
-    FormsModule,
-    ReactiveFormsModule,
-    BrowserAnimationsModule,
-    MaterialModule,
-    SharedModule
+	BrowserModule,
+	FormsModule,
+	ReactiveFormsModule,
+	BrowserAnimationsModule,
+	MaterialModule,
+	SharedModule
   ],
   entryComponents: [
-    FindMemoComponent
+	FindMemoComponent
   ]
 })
 export class FindModule { }

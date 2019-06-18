@@ -13,12 +13,12 @@ export class LoginNavComponent implements OnInit {
   constructor(private authService: AuthService) { }
 
   ngOnInit() {
-    this.authService.loginDataSubject.subscribe((auth) => {
-      this.username = !!auth ? auth.username : '';
-    });
+	this.authService.loginDataSubject.subscribe((auth) => {
+		this.username = !!auth ? auth.username : '';
+	});
   }
 
   logout() {
-    this.authService.logout();
+	this.authService.logout();
   }
 }

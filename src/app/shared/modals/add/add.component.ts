@@ -15,28 +15,28 @@ export class AddMemoComponent implements OnInit {
   isLoading: boolean;
 
   constructor(
-    private modalRef: BsModalRef,
-    private memoService: MemoService) { }
+	private modalRef: BsModalRef,
+	private memoService: MemoService) { }
 
   ngOnInit() {
   }
 
   async AddNewMemo(newQuestion: any, newAnswer: any) {
-    try {
-      this.isLoading = true;
+	try {
+		this.isLoading = true;
 
-      this.message = await this.memoService.addMemo(new Memo(newQuestion.value, newAnswer.value));
-    } catch (error) {
-      this.message = new Message(error.statusText, 'error');
-    } finally {
-      this.isLoading = false;
-      newQuestion.value = '';
-      newAnswer.value = '';
-      //this.modalRef.hide();
-    }
+		this.message = await this.memoService.addMemo(new Memo(newQuestion.value, newAnswer.value));
+	} catch (error) {
+		this.message = new Message(error.statusText, 'error');
+	} finally {
+		this.isLoading = false;
+		newQuestion.value = '';
+		newAnswer.value = '';
+		// this.modalRef.hide();
+	}
   }
 
   hide() {
-    this.modalRef.hide()
+	this.modalRef.hide();
   }
 }

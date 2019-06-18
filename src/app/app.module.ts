@@ -35,7 +35,7 @@ import { MaterialModule } from './material.module';
 		HomeModule,
 		NavModule,
 		FindModule,
-		//MaterialModule
+		// MaterialModule
 	],
 	providers: [
 		MemoService,
@@ -58,8 +58,18 @@ import { MaterialModule } from './material.module';
 })
 export class AppModule { }
 
-//TODO: tests
-//TODO: deploy
-//TODO: 3d-party login
-//TODO: angular materials (MatSnackBar, MatDialog, mat-progress-spinner/mat-spinner, mat-divider, mat-slide-toggle, badge, mat-horizontal-stepper)
-//TODO: Find modal fix validation
+// TODO: install fontawesome
+// TODO: lint
+// TODO: e2e
+// TODO: timers
+// TODO: deploy
+// TODO: 3d-party login
+// TODO: angular materials (
+	// MatSnackBar, 
+	// MatDialog, 
+	// mat-progress-spinner/mat-spinner, 
+	// mat-divider, 
+	// mat-slide-toggle, 
+	// badge, 
+	// mat-horizontal-stepper)
+// TODO: Find modal fix validation

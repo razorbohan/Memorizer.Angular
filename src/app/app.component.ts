@@ -13,6 +13,6 @@ export class AppComponent {
   title = 'memorizer';
 
   handleRouteAnimation(outlet) {
-    return outlet && outlet.activatedRouteData && outlet.activatedRouteData['animation'];
+	return outlet && outlet.activatedRouteData && outlet.activatedRouteData.animation;
   }
 }
