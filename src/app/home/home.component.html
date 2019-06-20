@@ -17,18 +17,26 @@
 	<div class="col-3 d-flex justify-content-center">
 		<button class="btn btn-outline-primary" (click)="showAnswer()">Show</button>
 	</div>
+	<fa name="exchange"></fa>
+	<div>
+		<fa name="exchange" rotate=90></fa>
+	</div>
+	
 	<div class="col-3 d-flex justify-content-center update-group">
 		<div class="btn-group" (mouseenter)="isFocused=true" (mouseleave)="isFocused=false">
 			<button class="btn btn-outline-secondary" *ngIf="isShowUpdateGroup || isFocused" (click)="replaceMemos()"
 				type="button">
-				<i class="fa fa-exchange"></i>
+				<!-- <i class="fa fa-exchange"></i> -->
+				<fa name="exchange" rotate="horizontal"></fa>
 			</button>
 			<button class="btn btn-outline-primary" *ngIf="isShowUpdateGroup || isFocused" (click)="updateMemo()"
 				type="button">
-				<i class="far fa-save"></i>
+				<!-- <i class="far fa-save"></i> -->
+				<fa name="save"></fa>
 			</button>
 			<button class="btn btn-outline-danger" (click)="deleteMemo()" type="button">
-				<i class="fas fa-trash-alt"></i>
+				<!-- <i class="fas fa-trash-alt"></i> -->
+				<fa name="trash"></fa>
 			</button>
 		</div>
 	</div>

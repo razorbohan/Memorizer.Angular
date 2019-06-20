@@ -14,6 +14,7 @@ import {
   MatSelectModule,
   MatButtonModule,
 } from '@angular/material';
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import {
 	MatDatepickerModule,
 	MatSelectModule,
 	MatButtonModule,
+	AngularFontAwesomeModule
   ]
 })
 export class HomeModule { }

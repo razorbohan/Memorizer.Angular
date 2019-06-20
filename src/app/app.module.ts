@@ -17,6 +17,8 @@ import { TokenInterceptorService } from './shared/services/token-interceptor.ser
 import { HomeGuard } from './shared/services/home.guard';
 import { AuthGuard } from './shared/services/auth.guard';
 
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
+
 import { MaterialModule } from './material.module';
 
 // import { BigLoaderComponent } from './shared/components/big-loader/big-loader.component';
@@ -35,6 +37,7 @@ import { MaterialModule } from './material.module';
 		HomeModule,
 		NavModule,
 		FindModule,
+		//AngularFontAwesomeModule
 		// MaterialModule
 	],
 	providers: [
