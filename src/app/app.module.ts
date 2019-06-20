@@ -60,9 +60,9 @@ export class AppModule { }
 
 // TODO: install fontawesome
 // TODO: lint
-// TODO: e2e
 // TODO: timers
 // TODO: deploy
+
 // TODO: 3d-party login
 // TODO: angular materials (
 	// MatSnackBar, 
@@ -72,4 +72,5 @@ export class AppModule { }
 	// mat-slide-toggle, 
 	// badge, 
 	// mat-horizontal-stepper)
-// TODO: Find modal fix validation
+	// TODO: Find modal fix validation
+	// TODO: e2e
