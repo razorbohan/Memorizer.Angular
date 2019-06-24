@@ -1,16 +1,16 @@
 <ul class="navbar-nav" *ngIf="!this.username">
-  <li class="nav-item">
-    <a class="nav-link" routerLink="/Auth/Login">Login</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" routerLink="/Auth/Register">Register</a>
-  </li>
+<li class="nav-item">
+	<a class="nav-link" routerLink="/Auth/Login">Login</a>
+</li>
+<li class="nav-item">
+	<a class="nav-link" routerLink="/Auth/Register">Register</a>
+</li>
 </ul>
 <ul class="navbar-nav" *ngIf="this.username">
-  <li class="nav-item">
-      <a class="nav-link" routerLink="/User/Profile">Hello, {{this.username}}!</a>
-  </li>
-  <li class="nav-item">
-      <a class="nav-link" (click)="logout()">Logout</a>
-  </li>
+<li class="nav-item">
+	<a class="nav-link" routerLink="/User/Profile">Hello, {{this.username}}!</a>
+</li>
+<li class="nav-item">
+	<a class="nav-link" (click)="logout()">Logout</a>
+</li>
 </ul>

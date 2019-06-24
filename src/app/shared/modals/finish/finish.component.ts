@@ -15,6 +15,6 @@ export class FinishComponent implements OnInit {
   ngOnInit() { }
 
   hide() {
-    this.modalRef.hide();
+	this.modalRef.hide();
   }
 }

@@ -1,0 +1,30 @@
+{
+  "name": "com.razorbohan.memorizer",
+  "displayName": "Memorizer",
+  "version": "1.0.0",
+  "description": "A simple app for memorizing things.",
+  "main": "index.js",
+  "scripts": {
+	"build": "cordova build android",
+	"run": "cordova run android"
+  },
+  "keywords": [
+    "ecosystem:cordova"
+  ],
+  "author": "RaZoR",
+  "license": "MIT",
+  "dependencies": {
+    "cordova-android": "^8.0.0"
+  },
+  "devDependencies": {
+    "cordova-plugin-whitelist": "^1.3.3"
+  },
+  "cordova": {
+    "plugins": {
+      "cordova-plugin-whitelist": {}
+    },
+    "platforms": [
+      "android"
+    ]
+  }
+}

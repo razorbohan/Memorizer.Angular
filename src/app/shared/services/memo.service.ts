@@ -25,112 +25,61 @@ export class MemoService {
 	}
 
 	public async init(): Promise<void> {
-		return new Promise((resolve, reject) => {
-			setTimeout(async () => {
-				const memos = await this.getMemos();
-				this.memos = this.filterMemos(memos);
-				// TODO: error
+		const memos = await this.getMemos();
+		this.memos = this.filterMemos(memos);
 
-				this.memoSubject = new BehaviorSubject<{ currentMemo: Memo, count: number }>
-					({ currentMemo: this.memos.pop(), count: this.memos.length });
-
-				// return count;
-				resolve();
-			}, 1000);
-		});
+		this.memoSubject = new BehaviorSubject<{ currentMemo: Memo, count: number }>
+			({ currentMemo: this.memos.pop(), count: this.memos.length });
 	}
 
 	public async getMemos(): Promise<Memo[]> {
-		return new Promise((resolve, reject) => {
-			setTimeout(async () => {
-				const response = await this.http.get<ApiResponse>(`${this.baseUrl}/GetMemos`).toPromise();
-				if (!response.success) {
-					reject(response.error);
-					return;
-				}
+		const response = await this.http.get<ApiResponse>(`${this.baseUrl}/GetMemos`).toPromise();
+		if (!response.success) {
+			throw new Error(response.error);
+		}
 
-				const memos = response.body as Memo[];
-				resolve(memos);
-			}, 1000);
-		});
-	}
-
-	public switchMode() {
-		this.mode = this.mode == 'Repeat' ? 'Learn' : 'Repeat';
-		this.modeSubject.next(this.mode);
-	}
-
-	public filterMemos(memos: Memo[]): Memo[] {
-		return memos
-			.filter((memo) => {
-				return new Date(memo.repeatDate) < new Date()
-					&& this.mode == 'Repeat'
-					? memo.postponeLevel != 0
-					: memo.postponeLevel == 0;
-			}).sort((date1, date2) => {
-				return new Date(date1.repeatDate).getTime() - new Date(date2.repeatDate).getTime();
-			}).sort((level1, level2) => {
-				return level1.postponeLevel - level2.postponeLevel;
-			});
+		return response.body as Memo[];
 	}
 
 	public async updateMemo(memo: Memo): Promise<Message> {
-		return new Promise<Message>((resolve) => {
-			setTimeout(async () => {
-				try {
-					const response = await this.http.post<ApiResponse>(`${this.baseUrl}/UpdateMemo`, memo).toPromise();
-					if (response.success) {
-						// return new Message('Updated!', 'success');
-						resolve(new Message('Updated!', 'success'));
-					} else { // return new Message(`Error updating memo: ${response.error}`, 'danger')
-						resolve(new Message(`Error updating memo: ${response.error}`, 'danger'));
-					}
-				} catch (error) {
-					// return new Message(`Error updating memo: ${error.status}: ${error.statusText}`, 'danger');
-					resolve(new Message(`Error updating memo: ${error.status}: ${error.statusText}`, 'danger'));
-				}
-			}, 1000);
-		});
+		try {
+			const response = await this.http.post<ApiResponse>(`${this.baseUrl}/UpdateMemo`, memo).toPromise();
+			if (response.success) {
+				return new Message('Updated!', 'success');
+			} else {
+				return new Message(`Error updating memo: ${response.error}`, 'danger')
+			}
+		} catch (error) {
+			return new Message(`Error updating memo: ${error.status}: ${error.statusText}`, 'danger');
+		}
 	}
 
 	public async addMemo(memo: Memo): Promise<Message> {
-		return new Promise<Message>((resolve) => {
-			setTimeout(async () => {
-				try {
-					const response = await this.http.post<ApiResponse>(`${this.baseUrl}/AddMemo`, memo).toPromise();
-					if (response.success) {
-						// return new Message('Added!', 'success');
-						resolve(new Message('Added!', 'success'));
-					} else { // return new Message(`Error adding memo: ${response.error}`, 'danger')
-						resolve(new Message(`Error adding memo: ${response.error}`, 'danger'));
-					}
-				} catch (error) {
-					// return new Message(`Error adding memo: ${error.status}: ${error.statusText}`, 'danger');
-					resolve(new Message(`Error adding memo: ${error.status}: ${error.statusText}`, 'danger'));
-				}
-			}, 1000);
-		});
+		try {
+			const response = await this.http.post<ApiResponse>(`${this.baseUrl}/AddMemo`, memo).toPromise();
+			if (response.success) {
+				return new Message('Added!', 'success');
+			} else {
+				return new Message(`Error adding memo: ${response.error}`, 'danger')
+			}
+		} catch (error) {
+			return new Message(`Error adding memo: ${error.status}: ${error.statusText}`, 'danger');
+		}
 	}
 
 	public async deleteMemo(memo: Memo): Promise<Message> {
-		return new Promise<Message>((resolve) => {
-			setTimeout(async () => {
-				try {
-					const response = await this.http.post<ApiResponse>(`${this.baseUrl}/DeleteMemo`, memo.id).toPromise();
-					if (response.success) {
-						// return new Message('Deleted!', 'success');
-						resolve(new Message('Deleted!', 'success'));
-					} else { // return new Message(`Error deleting memo: ${response.error}`, 'danger')
-						resolve(new Message(`Error deleting memo: ${response.error}`, 'danger'));
-					}
-				} catch (error) {
-					// return new Message(`Error deleting memo: ${error.status}: ${error.statusText}`, 'danger');
-					resolve(new Message(`Error deleting memo: ${error.status}: ${error.statusText}`, 'danger'));
-				} finally {
-					this.nextMemo();
-				}
-			}, 1000);
-		});
+		try {
+			const response = await this.http.post<ApiResponse>(`${this.baseUrl}/DeleteMemo`, memo.id).toPromise();
+			if (response.success) {
+				return new Message('Deleted!', 'success');
+			} else {
+				return new Message(`Error deleting memo: ${response.error}`, 'danger')
+			}
+		} catch (error) {
+			return new Message(`Error deleting memo: ${error.status}: ${error.statusText}`, 'danger');
+		} finally {
+			this.nextMemo();
+		}
 	}
 
 	public async submitAnswer(answer: string): Promise<Message> {
@@ -156,8 +105,6 @@ export class MemoService {
 				break;
 			default:
 				throw new Error(`Wrong answer: '${answer}'`);
-			// resolve(new Message(`Wrong answer: '${answer}`, 'danger'));
-			// return;
 		}
 
 		const message = await this.updateMemo(currentMemo);
@@ -166,12 +113,31 @@ export class MemoService {
 		return message;
 	}
 
+	private filterMemos(memos: Memo[]): Memo[] {
+		return memos
+			.filter((memo) => {
+				return new Date(memo.repeatDate) < new Date()
+					&& this.mode == 'Repeat'
+					? memo.postponeLevel != 0
+					: memo.postponeLevel == 0;
+			}).sort((date1, date2) => {
+				return new Date(date1.repeatDate).getTime() - new Date(date2.repeatDate).getTime();
+			}).sort((level1, level2) => {
+				return level1.postponeLevel - level2.postponeLevel;
+			});
+	}
+
 	private nextMemo() {
 		if (this.memos.length > 0) {
 			this.memoSubject.next({ currentMemo: this.memos.pop(), count: this.memos.length });
 		} else {
 			this.memoSubject.complete();
 		}
+	}
+
+	public switchMode() {
+		this.mode = this.mode == 'Repeat' ? 'Learn' : 'Repeat';
+		this.modeSubject.next(this.mode);
 	}
 
 	private GetTomorrow(add = 1) {

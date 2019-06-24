@@ -44,5 +44,8 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
-android_memo/
+
+cordova/node_modules
+cordova/www
+cordova/platforms
 package-lock.json

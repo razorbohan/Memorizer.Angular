@@ -1,36 +1,36 @@
 <!-- <h2>{{title}}</h2> -->
 <div class="row">
-  <div class="col-md-5">
-    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-      <h4>Create a new account.</h4>
-      <hr />
+<div class="col-md-5">
+	<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+	<h4>Create a new account.</h4>
+	<hr />
 
-      <alert-message [message]="errorMessage"></alert-message>
+	<memo-alert-message [message]="errorMessage"></memo-alert-message>
 
-      <mat-form-field>
-        <mat-label>Input your email</mat-label>
-        <input matInput formControlName="email" placeholder="Email" />
-        <mat-error *ngIf="registerForm.get('email').invalid && registerForm.get('email')['errors']['required']">Email must not be empty</mat-error>
-        <mat-error *ngIf="registerForm.get('email').invalid && registerForm.get('email')['errors']['email']">Wrong email address</mat-error>
-        <mat-error *ngIf="registerForm.get('email').invalid && registerForm.get('email')['errors']['email']">Email already is used</mat-error>
-      </mat-form-field>
-      <memo-loader [isLoading]="this.isCheckingEmail"></memo-loader>
+	<mat-form-field>
+		<mat-label>Input your email</mat-label>
+		<input matInput formControlName="email" placeholder="Email" />
+		<mat-error *ngIf="registerForm.get('email').invalid && registerForm.get('email')['errors']['required']">Email must not be empty</mat-error>
+		<mat-error *ngIf="registerForm.get('email').invalid && registerForm.get('email')['errors']['email']">Wrong email address</mat-error>
+		<mat-error *ngIf="registerForm.get('email').invalid && registerForm.get('email')['errors']['email']">Email already is used</mat-error>
+	</mat-form-field>
+	<memo-loader [isLoading]="this.isCheckingEmail"></memo-loader>
 
-      <mat-form-field>
-        <mat-label>Input your password</mat-label>
-        <input matInput type="password" formControlName="password" placeholder="Password" />
-        <mat-error *ngIf="registerForm.get('password').invalid && registerForm.get('password')['errors']['required']">Password must not be empty</mat-error>
-        <mat-error *ngIf="registerForm.get('password').invalid && registerForm.get('password')['errors']['minlength']">Your password is too short</mat-error>
-      </mat-form-field>
+	<mat-form-field>
+		<mat-label>Input your password</mat-label>
+		<input matInput type="password" formControlName="password" placeholder="Password" />
+		<mat-error *ngIf="registerForm.get('password').invalid && registerForm.get('password')['errors']['required']">Password must not be empty</mat-error>
+		<mat-error *ngIf="registerForm.get('password').invalid && registerForm.get('password')['errors']['minlength']">Your password is too short</mat-error>
+	</mat-form-field>
 
-      <mat-form-field>
-        <mat-label>Repeat your password</mat-label>
-        <input matInput type="password" formControlName="confirmPassword" placeholder="Password" />
-        <mat-error *ngIf="registerForm.get('confirmPassword').invalid && registerForm.get('confirmPassword')['errors']['MatchPassword']">Passwords do not match</mat-error>
-      </mat-form-field>
+	<mat-form-field>
+		<mat-label>Repeat your password</mat-label>
+		<input matInput type="password" formControlName="confirmPassword" placeholder="Password" />
+		<mat-error *ngIf="registerForm.get('confirmPassword').invalid && registerForm.get('confirmPassword')['errors']['MatchPassword']">Passwords do not match</mat-error>
+	</mat-form-field>
 
-      <button type="submit" class="btn btn-outline-secondary" [disabled]="!registerForm.valid">Register</button>
-    </form>
-    <memo-loader [isLoading]="this.isLoading"></memo-loader>
-  </div>
+	<button type="submit" class="btn btn-outline-secondary" [disabled]="!registerForm.valid">Register</button>
+	</form>
+	<memo-loader [isLoading]="this.isLoading"></memo-loader>
+</div>
 </div>

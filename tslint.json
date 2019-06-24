@@ -22,7 +22,7 @@
     "max-classes-per-file": false,
     "max-line-length": [
       true,
-      140
+      200
     ],
     "member-access": false,
     "member-ordering": [
@@ -75,6 +75,12 @@
     "use-life-cycle-interface": true,
     "use-pipe-transform-interface": true,
     "component-class-suffix": true,
-    "directive-class-suffix": true
+    "directive-class-suffix": true,
+    "semicolon": [
+      true,
+      "always",
+      "ignore-interfaces"
+	],
+	"triple-equals": false
   }
 }

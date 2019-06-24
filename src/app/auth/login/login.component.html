@@ -1,67 +1,67 @@
 <!-- <h2>{{title}}</h2> -->
 <div class="row">
-  <div class="col-lg-5">
-    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-      <h4>Use a local account to log in.</h4>
-      <hr />
+<div class="col-lg-5">
+	<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+	<h4>Use a local account to log in.</h4>
+	<hr />
 
-      <alert-message [message]="errorMessage"></alert-message>
-      <div>
-        <mat-form-field appearance="outline">
-          <mat-label>Input your email</mat-label>
-          <input matInput formControlName="email" placeholder="Email" />
-          <mat-error *ngIf="loginForm.get('email').invalid && loginForm.get('email')['errors']['required']">Email must not be empty</mat-error>
-          <mat-error *ngIf="loginForm.get('email').invalid && loginForm.get('email')['errors']['email']">Wrong email address</mat-error>
-        </mat-form-field>
-      </div>
+	<memo-alert-message [message]="errorMessage"></memo-alert-message>
+	<div>
+		<mat-form-field appearance="outline">
+		<mat-label>Input your email</mat-label>
+		<input matInput formControlName="email" placeholder="Email" />
+		<mat-error *ngIf="loginForm.get('email').invalid && loginForm.get('email')['errors']['required']">Email must not be empty</mat-error>
+		<mat-error *ngIf="loginForm.get('email').invalid && loginForm.get('email')['errors']['email']">Wrong email address</mat-error>
+		</mat-form-field>
+	</div>
 
-      <div>
-        <mat-form-field appearance="outline">
-          <mat-label>Input your password</mat-label>
-          <input matInput type="password" formControlName="password" placeholder="Password" />
-          <mat-error *ngIf="loginForm.get('password').invalid && loginForm.get('password')['errors']['required']">Password must not be empty</mat-error>
-          <mat-error *ngIf="loginForm.get('password').invalid && loginForm.get('password')['errors']['minlength']">Your password is too short</mat-error>
-        </mat-form-field>
-      </div>
-      <div class="form-group">
-        <memo-switcher></memo-switcher>
-      </div>
-      <div class="form-group">
-        <button type="submit" class="btn btn-outline-secondary" [disabled]="!loginForm.valid">Log in</button>
-      </div>
-    </form>
-    <memo-loader [isLoading]="isLoading"></memo-loader>
-  </div>
-  <!-- <div class="col-md-6 offset-md-2">
-        <section>
-            <h4>Use another service to log in.</h4>
-            <hr />
-            @{
-                if ((Model.ExternalLogins?.Count ?? 0) == 0)
-                {
-                    <div>
-                        <p>
-                            There are no external authentication services configured. See <a href="https://go.microsoft.com/fwlink/?LinkID=532715">this article</a>
-                            for details on setting up this ASP.NET application to support logging in via external services.
-                        </p>
-                    </div>
-                }
-                else
-                {
-                    <form asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post">
-                        <div>
-                            <p>
-                                @foreach (var provider in Model.ExternalLogins)
-                                {
-                                    <button type="submit" class="btn btn-block btn-social btn-lg btn-@provider.Name.ToLower().Replace("vkontakte", "vk")" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">
-                                        <i class="fa fa-@provider.Name.ToLower().Replace("vkontakte", "vk").Replace("microsoft", "windows")"></i>Sign in with @provider.DisplayName
-                                    </button>
-                                }
-                            </p>
-                        </div>
-                    </form>
-                }
-            }
-        </section>
-    </div> -->
+	<div>
+		<mat-form-field appearance="outline">
+		<mat-label>Input your password</mat-label>
+		<input matInput type="password" formControlName="password" placeholder="Password" />
+		<mat-error *ngIf="loginForm.get('password').invalid && loginForm.get('password')['errors']['required']">Password must not be empty</mat-error>
+		<mat-error *ngIf="loginForm.get('password').invalid && loginForm.get('password')['errors']['minlength']">Your password is too short</mat-error>
+		</mat-form-field>
+	</div>
+	<div class="form-group">
+		<memo-switcher></memo-switcher>
+	</div>
+	<div class="form-group">
+		<button type="submit" class="btn btn-outline-secondary" [disabled]="!loginForm.valid">Log in</button>
+	</div>
+	</form>
+	<memo-loader [isLoading]="isLoading"></memo-loader>
+</div>
+<!-- <div class="col-md-6 offset-md-2">
+		<section>
+			<h4>Use another service to log in.</h4>
+			<hr />
+			@{
+				if ((Model.ExternalLogins?.Count ?? 0) == 0)
+				{
+					<div>
+						<p>
+							There are no external authentication services configured. See <a href="https://go.microsoft.com/fwlink/?LinkID=532715">this article</a>
+							for details on setting up this ASP.NET application to support logging in via external services.
+						</p>
+					</div>
+				}
+				else
+				{
+					<form asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+						<div>
+							<p>
+								@foreach (var provider in Model.ExternalLogins)
+								{
+									<button type="submit" class="btn btn-block btn-social btn-lg btn-@provider.Name.ToLower().Replace("vkontakte", "vk")" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">
+										<i class="fa fa-@provider.Name.ToLower().Replace("vkontakte", "vk").Replace("microsoft", "windows")"></i>Sign in with @provider.DisplayName
+									</button>
+								}
+							</p>
+						</div>
+					</form>
+				}
+			}
+		</section>
+	</div> -->
 </div>

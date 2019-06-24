@@ -1,9 +1,9 @@
 <div @fade
-  class="alert alert-{{message.type}}" 
-  *ngIf="message" 
-  (click-outside)="hideMessage()">
-  {{message.text}}
-  <button type="button" class="close" (click)="hideMessage()">
-    <span>×</span>
-  </button>
+	class="alert alert-{{message.type}}"
+	*ngIf="message"
+	(memoClickOutside)="hideMessage()">
+	{{message.text}}
+	<button type="button" class="close" (click)="hideMessage()">
+		<span>×</span>
+	</button>
 </div>

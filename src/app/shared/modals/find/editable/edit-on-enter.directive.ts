@@ -2,15 +2,15 @@ import { Directive, Input, HostListener } from '@angular/core';
 import { EditableComponent } from './editable.component';
 
 @Directive({
-  selector: '[editableOnEnter]'
+	// tslint:disable-next-line:directive-selector
+	selector: '[editableOnEnter]'
 })
 export class EditableOnEnterDirective {
-  constructor(private editable: EditableComponent) {
-  }
+	constructor(private editable: EditableComponent) {
+	}
 
-  @HostListener('keyup.enter')
-  onEnter() {
-	this.editable.toViewMode();
-  }
-
+	@HostListener('keyup.enter')
+	onEnter() {
+		this.editable.toViewMode();
+	}
 }

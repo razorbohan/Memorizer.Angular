@@ -7,6 +7,11 @@ import { Message } from '../shared/models/message';
 import { FinishComponent } from '../shared/modals/finish/finish.component';
 import { ConfirmComponent } from '../shared/modals/confirm/confirm.component';
 import { fadeAnimation } from '../shared/animations/fade.animation';
+import {
+	faTrashAlt,
+	faExchangeAlt,
+	faSave,
+} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
 	selector: 'memo-home',
@@ -15,6 +20,10 @@ import { fadeAnimation } from '../shared/animations/fade.animation';
 	animations: [fadeAnimation]
 })
 export class HomeComponent implements OnInit {
+
+	faTrashAlt = faTrashAlt;
+	faExchangeAlt = faExchangeAlt;
+	faSave = faSave;
 
 	currentMemo: Memo = new Memo();
 	count: number;
@@ -27,8 +36,9 @@ export class HomeComponent implements OnInit {
 
 	message: Message;
 
-	constructor(private memoService: MemoService,
-		           private modalService: BsModalService) { }
+	constructor(
+		private memoService: MemoService,
+		private modalService: BsModalService) { }
 
 	async ngOnInit() {
 		this.memoService.modeSubject.subscribe(

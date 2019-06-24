@@ -1,17 +1,17 @@
 <div class="modal-header">
-  <h5 class="modal-title">Add new Memo</h5>
-  <button type="button" class="close pull-right" aria-label="Close" (click)="hide()">
-    <span aria-hidden="true">&times;</span>
-  </button>
+	<h5 class="modal-title">Add new Memo</h5>
+	<button type="button" class="close pull-right" aria-label="Close" (click)="hide()">
+	<span aria-hidden="true">&times;</span>
+	</button>
 </div>
 <div class="modal-body">
-  <alert-message [message]="message"></alert-message>
+	<memo-alert-message [message]="message"></memo-alert-message>
 
-  <textarea #newQuestion class="col-md-12"></textarea>
-  <textarea #newAnswer class="col-md-12"></textarea>
+	<textarea #newQuestion class="col-md-12"></textarea>
+	<textarea #newAnswer class="col-md-12"></textarea>
 
-  <memo-loader [isLoading]="isLoading"></memo-loader>
+	<memo-loader [isLoading]="isLoading"></memo-loader>
 </div>
 <div class="modal-footer">
-  <button class="btn btn-primary" (click)="AddNewMemo(newQuestion, newAnswer)">Add</button>
+	<button class="btn btn-primary" (click)="AddNewMemo(newQuestion, newAnswer)">Add</button>
 </div>
