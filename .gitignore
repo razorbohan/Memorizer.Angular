@@ -49,3 +49,4 @@ cordova/node_modules
 cordova/www
 cordova/platforms
 package-lock.json
+src/environments/environment.prod.ts
